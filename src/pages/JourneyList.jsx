@@ -7,13 +7,16 @@ import { clearProgress } from '../utils/storage.js';
 export default function JourneyList() {
   return (
     <div className="space-y-6">
-      <section>
-        <p className="text-sm uppercase tracking-wide text-blue-700">Prototype</p>
-        <h1 className="text-3xl font-bold text-slate-900">Walk His Journey</h1>
-        <p className="mt-2 max-w-2xl text-slate-600">
-          Walk the distances Jesus walked and unlock each part of His story. Log your miles,
-          reflect, and pray as you go.
-        </p>
+      <section className="space-y-4">
+        <div className="w-full h-28 bg-[url('/banner-journey.png')] bg-cover bg-center rounded-lg mb-2"></div>
+        <div className="space-y-2">
+          <p className="text-sm uppercase tracking-wide text-blue-700">Prototype</p>
+          <h1 className="text-3xl font-bold text-slate-900">Walk His Journey</h1>
+          <p className="mt-2 max-w-2xl text-slate-600">
+            Walk the distances Jesus walked and unlock each part of His story. Log your miles,
+            reflect, and pray as you go.
+          </p>
+        </div>
       </section>
 
       <div className="flex flex-wrap gap-3">

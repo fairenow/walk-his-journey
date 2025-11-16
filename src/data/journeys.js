@@ -1,6 +1,7 @@
 export const journeys = [
   {
     id: 'naz-beth',
+    icon: '👣',
     title: 'Nazareth → Bethlehem',
     distanceMiles: 80,
     scripture: 'Luke 2:1–20',
@@ -10,6 +11,7 @@ export const journeys = [
   },
   {
     id: 'beth-egypt',
+    icon: '🛡',
     title: 'Bethlehem → Egypt',
     distanceMiles: 90,
     scripture: 'Matthew 2:13–15',
@@ -19,6 +21,7 @@ export const journeys = [
   },
   {
     id: 'egypt-naz',
+    icon: '🌅',
     title: 'Egypt → Nazareth',
     distanceMiles: 300,
     scripture: 'Matthew 2:19–23',
@@ -28,6 +31,7 @@ export const journeys = [
   },
   {
     id: 'naz-jordan',
+    icon: '🕊',
     title: 'Nazareth → Jordan River',
     distanceMiles: 60,
     scripture: 'Mark 1:9–11',
