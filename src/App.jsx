@@ -4,6 +4,7 @@ import JourneyDetail from './pages/JourneyDetail.jsx';
 import WalkMode from './pages/WalkMode.jsx';
 import PrayerWalk from './pages/PrayerWalk.jsx';
 import Journal from './pages/Journal.jsx';
+import Discover from './pages/Discover.jsx';
 import Layout from './components/Layout.jsx';
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/journey/:id" element={<JourneyDetail />} />
           <Route path="/walk/:id" element={<WalkMode />} />
           <Route path="/prayer/:id" element={<PrayerWalk />} />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/journal" element={<Journal />} />
         </Routes>
       </div>
