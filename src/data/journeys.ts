@@ -71,7 +71,27 @@ export const phases: JourneyPhase[] = [
     description:
       "In small towns and by a simple lake, crowds grow, miracles multiply, and the kingdom of God becomes impossible to ignore."
   },
-  // You’ll add phase3–5 later in the same pattern.
+  {
+    id: "phase3",
+    title: "The Wide World Awakens (Beyond Galilee)",
+    order: 3,
+    description:
+      "Jesus pushes past hometown borders—storms calm, demons scream, and outsiders discover they’re not outside His love. Every step stretches the disciples’ faith."
+  },
+  {
+    id: "phase4",
+    title: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 4,
+    description:
+      "With the cross up ahead, Jesus walks with purpose and compassion—teaching, healing, confronting corruption, and welcoming the lost. This is His most focused march."
+  },
+  {
+    id: "phase5",
+    title: "Death Defeated (Resurrection & Beyond)",
+    order: 5,
+    description:
+      "What looked like the end becomes the beginning. Jesus walks again—this time in glory—restoring hope, opening Scripture, and launching the movement that changes the world."
+  }
 ];
 
 export const journeyScenes: JourneyScene[] = [
@@ -606,6 +626,378 @@ export const journeyScenes: JourneyScene[] = [
       "Animated ancient village gate, funeral procession with mourners, coffin-like bier carried by men, teacher figure stopping the group, emotional mother, sudden joy as the young man sits up.",
     icon: "💔",
     colorHint: "from-slate-300 to-rose-300"
+  },
+
+  // =========================
+  // PHASE 3 – WIDER REACH: BEYOND GALILEE
+  // =========================
+
+  {
+    id: "3.1-storm-gerasenes",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 1,
+
+    title: "Storm → Shore: Power No One Can Ignore",
+    tagLine:
+      "In one night, nature bows, demons flee, and a whole region is shaken awake.",
+
+    approxDate: "Mid-ministry",
+    from: "Capernaum (west shore)",
+    to: "Gerasenes/Gadarenes (east shore)",
+    distanceMi: 5,
+    distanceKm: 8,
+
+    travelParty: ["Jesus", "The Twelve"],
+    peopleMet: [
+      "Terrified disciples",
+      "Demon-possessed man (‘Legion’)",
+      "Pig herders",
+      "Townspeople"
+    ],
+
+    miracles: [
+      "Storm calmed instantly",
+      "Thousands of demons cast out",
+      "Man restored to his right mind"
+    ],
+
+    keyMoments: [
+      "A violent storm hits—waves slamming the boat.",
+      "Jesus sleeps through chaos until the disciples panic.",
+      "He speaks one sentence—nature obeys.",
+      "They step onto shore and meet a man possessed.",
+      "Jesus drives out ‘Legion,’ sending the demons into pigs.",
+      "The man becomes a missionary to his region."
+    ],
+
+    themes: [
+      "Jesus has authority over things that terrify you.",
+      "The enemy cannot chain what Jesus comes to free.",
+      "Your testimony matters more than your history."
+    ],
+
+    scriptureRefs: [
+      { book: "Mark", ref: "4:35–41" },
+      { book: "Mark", ref: "5:1–20" },
+      { book: "Matthew", ref: "8:23–34" },
+      { book: "Luke", ref: "8:22–39" }
+    ],
+
+    summary:
+      "A storm nearly sinks the disciples until Jesus silences wind and waves. On the other shore, a tormented man meets the One who can set him free. His transformation shakes the whole region.",
+
+    youthTakeaway:
+      "When chaos hits and your mind spirals, Jesus is not overwhelmed. He can bring peace to storms outside—and storms inside.",
+
+    cardBlurb:
+      "One night. One storm. One broken man. One unstoppable Savior.",
+
+    storyboardBeat:
+      "Thunder crashes, disciples scream, Jesus rises calmly. Cut to sudden calm. Smash-cut to the shoreline where a wild, chained man rushes out—only to freeze under Jesus’ gaze.",
+
+    visualPrompt:
+      "Animated stormy sea, small fishing boat in giant waves, bright flash of calm, eerie rocky shoreline with a distressed man approaching, dramatic lighting.",
+
+    icon: "🌩",
+    colorHint: "from-indigo-400 to-blue-300"
+  },
+
+  {
+    id: "3.2-nazareth-rejection",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 2,
+
+    title: "Capernaum → Nazareth: Hometown Walls",
+    tagLine: "Familiarity tries to cage destiny.",
+
+    approxDate: "Mid-ministry",
+    from: "Capernaum",
+    to: "Nazareth",
+    distanceMi: 20,
+    distanceKm: 32,
+
+    travelParty: ["Jesus", "Disciples"],
+    peopleMet: ["Nazareth synagogue", "Old neighbors", "Local teachers"],
+
+    miracles: ["Very few—because of unbelief"],
+
+    keyMoments: [
+      "Jesus returns home with His disciples.",
+      "The synagogue crowd is amazed… then offended.",
+      "They question His authority because they knew Him as a kid.",
+      "Jesus remarks, ‘A prophet is without honor in his hometown.’"
+    ],
+
+    themes: [
+      "People who know your past may resist your growth.",
+      "Not everyone will celebrate what God is doing in you.",
+      "Faith matters—it shapes what you experience."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "13:53–58" },
+      { book: "Mark", ref: "6:1–6" }
+    ],
+
+    summary:
+      "Jesus returns to Nazareth. At first, people listen—but soon old assumptions choke fresh revelation. Their unbelief blocks what Jesus desires to do.",
+
+    youthTakeaway:
+      "Don’t let the voices from your past decide your future. Jesus understands being underestimated by familiar faces.",
+
+    cardBlurb:
+      "The town that raised Him tries to box Him in again.",
+
+    storyboardBeat:
+      "Nazareth’s dusty streets. People whisper. In the synagogue, faces shift from curiosity to hostility as Jesus speaks. Camera zooms on His steady eyes.",
+
+    visualPrompt:
+      "Animated village synagogue, tense crowd, Jesus standing at a scroll, people crossing arms and shaking heads.",
+
+    icon: "🏘",
+    colorHint: "from-stone-300 to-rose-300"
+  },
+
+  {
+    id: "3.3-bethsaida-5000",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 3,
+
+    title: "Galilee → Bethsaida: The Impossible Lunch",
+    tagLine: "Thousands gather. Little food. One miracle that never gets old.",
+
+    approxDate: "Later Galilean ministry",
+    from: "Near Capernaum",
+    to: "Remote hills near Bethsaida",
+    distanceMi: 3,
+    distanceKm: 5,
+
+    travelParty: ["Jesus", "Disciples", "5,000+ crowd"],
+    peopleMet: ["Hungry crowds", "Overwhelmed disciples"],
+
+    miracles: [
+      "Feeding 5,000",
+      "Walking on water",
+      "Calming wind again"
+    ],
+
+    keyMoments: [
+      "Jesus withdraws but crowds chase Him.",
+      "Disciples panic about feeding everyone.",
+      "A boy offers his small lunch.",
+      "Jesus multiplies it until everyone is full.",
+      "That night, He walks on water to reach His disciples."
+    ],
+
+    themes: [
+      "Give Jesus what you have—even if it feels small.",
+      "When God calls you to help people, He provides the strength.",
+      "Faith grows in storms and scarcity."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "14:13–33" },
+      { book: "Mark", ref: "6:30–52" },
+      { book: "Luke", ref: "9:10–17" },
+      { book: "John", ref: "6:1–21" }
+    ],
+
+    summary:
+      "Crowds chase Jesus to a remote place. With a boy’s tiny lunch, He feeds everyone. Later, He walks across the waves to reach His disciples.",
+
+    youthTakeaway:
+      "Never underestimate what God can do with the small things you’re willing to share. Miracles often start with just one yes.",
+
+    cardBlurb:
+      "A hungry crowd. A tiny lunch. A miracle that people still talk about 2,000 years later.",
+
+    storyboardBeat:
+      "Wide shot of massive crowd on hillside, disciples stressed. Close-up on boy handing bread. Explosion of joyful faces as baskets overflow. Night boat scene—Jesus walking calmly on dark water.",
+
+    visualPrompt:
+      "Animated lakeside hillside full of people, sunset lighting, small bread and fish in hands, night scene with glowing figure walking on moonlit waves.",
+
+    icon: "🍞",
+    colorHint: "from-amber-200 to-blue-300"
+  },
+
+  {
+    id: "3.4-tyre-sidon",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 4,
+
+    title: "Galilee → Tyre & Sidon: The Bold Outsider",
+    tagLine: "A desperate mom refuses to take no for an answer.",
+
+    approxDate: "Later Galilean ministry",
+    from: "Galilee",
+    to: "Tyre & Sidon region",
+    distanceMi: 40,
+    distanceKm: 64,
+
+    travelParty: ["Jesus", "Disciples"],
+    peopleMet: ["Syrophoenician woman", "Her demon-tormented daughter"],
+
+    miracles: [
+      "Demon cast out at a distance"
+    ],
+
+    keyMoments: [
+      "Jesus enters Gentile territory.",
+      "A desperate mom begs Jesus to help her daughter.",
+      "Jesus tests her faith—she holds firm.",
+      "He heals the girl instantly."
+    ],
+
+    themes: [
+      "Persistent faith breaks through barriers.",
+      "Jesus’ mercy crosses cultural lines.",
+      "Desperation can be holy."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "15:21–28" },
+      { book: "Mark", ref: "7:24–30" }
+    ],
+
+    summary:
+      "In foreign territory, a bold mother begs Jesus for her daughter’s freedom. Her persistent faith wins the day, and Jesus heals the girl instantly.",
+
+    youthTakeaway:
+      "God honors real, persistent faith—even when you feel like an outsider or you don’t ‘fit.’ Jesus hears you.",
+
+    cardBlurb:
+      "She refuses to leave without a miracle—and she gets one.",
+
+    storyboardBeat:
+      "Coastal city streets, a desperate woman kneels before Jesus. Emotional close-up of her resolve. Jesus nods, and a rush of light signals distant healing.",
+
+    visualPrompt:
+      "Animated ancient coastal city, emotional woman kneeling before a compassionate teacher, warm Mediterranean colors.",
+
+    icon: "🌊",
+    colorHint: "from-cyan-200 to-purple-300"
+  },
+
+  {
+    id: "3.5-decapolis-4000",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 5,
+
+    title: "Decapolis: Compassion for the Forgotten",
+    tagLine: "A Gentile crowd gets a front-row seat to God’s love.",
+
+    approxDate: "Later ministry",
+    from: "Tyre/Sidon route",
+    to: "Decapolis region",
+    distanceMi: 60,
+    distanceKm: 96,
+
+    travelParty: ["Jesus", "Disciples", "Crowds"],
+    peopleMet: ["Deaf man", "Gentile crowds"],
+
+    miracles: [
+      "Healing a deaf man",
+      "Feeding the 4,000"
+    ],
+
+    keyMoments: [
+      "Jesus heals a man who cannot hear or speak.",
+      "Crowds gather—again with little food.",
+      "Jesus multiplies bread and fish for 4,000+ people."
+    ],
+
+    themes: [
+      "Jesus opens physical and spiritual ears.",
+      "Compassion drives miracles.",
+      "Outsiders aren’t outside God’s love."
+    ],
+
+    scriptureRefs: [
+      { book: "Mark", ref: "7:31–37" },
+      { book: "Mark", ref: "8:1–10" }
+    ],
+
+    summary:
+      "In the Gentile-heavy region of Decapolis, Jesus heals a deaf man and feeds a massive crowd. Compassion flows where others overlook.",
+
+    youthTakeaway:
+      "Jesus isn’t just for church kids or ‘religious’ people. He cares deeply about those who feel far away.",
+
+    cardBlurb:
+      "Open ears. Loosened tongues. Baskets overflowing.",
+
+    storyboardBeat:
+      "Scene of a deaf man looking confused as Jesus gently touches his ears. Crowd amazes as he speaks. Huge crowd sits down as food multiplies across hillsides.",
+
+    visualPrompt:
+      "Animated mixed-ethnicity crowd in ancient hills, joyful reactions, man surprised at hearing for first time.",
+
+    icon: "👂",
+    colorHint: "from-blue-200 to-amber-300"
+  },
+
+  {
+    id: "3.6-caesarea-philippi",
+    phaseId: "phase3",
+    phaseTitle: "The Wide World Awakens (Beyond Galilee)",
+    order: 6,
+
+    title: "Galilee → Caesarea Philippi: The Turning Point",
+    tagLine: "One question decides everything.",
+
+    approxDate: "Late ministry",
+    from: "Galilee",
+    to: "Caesarea Philippi",
+    distanceMi: 30,
+    distanceKm: 48,
+
+    travelParty: ["Jesus", "The Twelve"],
+    peopleMet: ["Disciples only"],
+
+    miracles: [],
+
+    keyMoments: [
+      "Jesus leads His disciples far north, away from crowds.",
+      "In the shadows of pagan temples, He asks, ‘Who do you say I am?’",
+      "Peter confesses: ‘You are the Christ.’",
+      "Jesus predicts His death for the first time."
+    ],
+
+    themes: [
+      "Every disciple must answer Jesus’ question personally.",
+      "Revelation often comes in quiet, far-from-home places.",
+      "The path to glory runs through sacrifice."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "16:13–28" },
+      { book: "Mark", ref: "8:27–9:1" },
+      { book: "Luke", ref: "9:18–27" }
+    ],
+
+    summary:
+      "Far from Galilee’s crowds, Jesus asks His disciples who they believe He truly is. Peter answers boldly. Jesus begins revealing the road ahead: suffering, death, resurrection.",
+
+    youthTakeaway:
+      "Your relationship with Jesus can’t be based on someone else’s opinion. At some point, you have to answer the question: Who is He to you?",
+
+    cardBlurb:
+      "In a place full of fake gods, the real Messiah asks the real question.",
+
+    storyboardBeat:
+      "Quiet mountainside near pagan shrines. Jesus turns toward disciples. Peter steps forward, eyes burning, declaring the truth. Somber mood as Jesus predicts His suffering.",
+
+    visualPrompt:
+      "Animated rocky landscape with ancient shrines in background, small group discussion, dramatic lighting.",
+
+    icon: "❓",
+    colorHint: "from-purple-200 to-indigo-300"
   }
 ];
 
