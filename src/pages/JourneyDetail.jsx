@@ -1,9 +1,28 @@
 import { Link, useParams } from 'react-router-dom';
 import { journeyScenes } from '../data/journeys.ts';
+import { getMiles } from '../utils/storage.js';
 
 export default function JourneyDetail() {
   const { id } = useParams();
   const scene = journeyScenes.find((item) => item.id === id);
+  const milesWalked = scene ? getMiles(scene.id) : 0;
+  const totalMiles = scene?.distanceMi ?? scene?.distanceMiles ?? 0;
+  const progressRatio = totalMiles ? Math.min(milesWalked / totalMiles, 1) : 1;
+  const youthTakeawayThreshold = totalMiles ? Math.min(totalMiles * 0.25, totalMiles) : 0;
+  const fullMomentsThreshold = totalMiles ? Math.min(totalMiles * 0.6, totalMiles) : 0;
+  const youthTakeawayUnlocked = !totalMiles || milesWalked >= youthTakeawayThreshold;
+  const themesUnlocked = !totalMiles || milesWalked >= totalMiles;
+
+  const keyMomentsToShow = !scene
+    ? []
+    : scene.keyMoments.slice(
+        0,
+        !totalMiles
+          ? scene.keyMoments.length
+          : Math.max(1, Math.ceil(progressRatio * scene.keyMoments.length))
+      );
+
+  const allMomentsUnlocked = keyMomentsToShow.length === (scene?.keyMoments.length ?? 0);
 
   if (!scene) {
     return (
@@ -43,7 +62,15 @@ export default function JourneyDetail() {
                 <span className="text-lg">✨</span>
                 <span>{scene.tagLine}</span>
               </p>
-              <p className="text-sm text-slate-600">{scene.phaseTitle}</p>
+              <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
+                <p>{scene.phaseTitle}</p>
+                {totalMiles ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-800 ring-1 ring-slate-200">
+                    <span className="text-indigo-500">📏</span>
+                    {milesWalked} / {totalMiles} mi logged
+                  </span>
+                ) : null}
+              </div>
             </div>
           </div>
         </header>
@@ -55,24 +82,40 @@ export default function JourneyDetail() {
 
           <Section title="Scene Highlights" accent="bg-indigo-500">
             <ul className="space-y-2 text-slate-800">
-              {scene.keyMoments.map((moment) => (
+              {keyMomentsToShow.map((moment) => (
                 <li key={moment} className="flex items-start gap-3 rounded-xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-slate-100">
                   <span className="mt-0.5 text-indigo-500">•</span>
                   <span className="leading-relaxed">{moment}</span>
                 </li>
               ))}
             </ul>
+            {!allMomentsUnlocked && totalMiles ? (
+              <p className="text-xs text-indigo-700/90">
+                Keep walking—log {Math.max(fullMomentsThreshold - milesWalked, 0).toFixed(1)} more miles to unlock every moment in this scene.
+              </p>
+            ) : null}
           </Section>
 
           <Section title="Why It Matters" accent="bg-amber-500">
             <div className="space-y-4">
-              <p className="text-base leading-relaxed text-slate-800">{scene.youthTakeaway}</p>
+              {youthTakeawayUnlocked ? (
+                <p className="text-base leading-relaxed text-slate-800">{scene.youthTakeaway}</p>
+              ) : (
+                <div className="rounded-xl bg-amber-50/80 p-4 text-sm text-amber-900 ring-1 ring-amber-200">
+                  Walk {Math.max(youthTakeawayThreshold - milesWalked, 0).toFixed(1)} more miles to unlock this takeaway.
+                </div>
+              )}
               <div className="flex flex-wrap gap-2">
-                {scene.themes.map((theme) => (
+                {(themesUnlocked ? scene.themes : scene.themes.slice(0, 1)).map((theme) => (
                   <span key={theme} className="rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-800 ring-1 ring-amber-200">
                     {theme}
                   </span>
                 ))}
+                {!themesUnlocked && scene.themes.length > 1 ? (
+                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 ring-1 ring-amber-200">
+                    Walk {Math.max(totalMiles - milesWalked, 0).toFixed(1)} more miles to reveal all themes
+                  </span>
+                ) : null}
               </div>
             </div>
           </Section>
