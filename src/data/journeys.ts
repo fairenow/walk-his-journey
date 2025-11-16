@@ -1382,6 +1382,191 @@ export const journeyScenes: JourneyScene[] = [
 
     icon: "✝️",
     colorHint: "from-red-500 to-purple-500"
+  },
+
+  // =========================
+  // PHASE 5 – RESURRECTION & BEYOND
+  // =========================
+
+  {
+    id: "5.1-resurrection-appearances",
+    phaseId: "phase5",
+    phaseTitle: "Death Defeated (Resurrection & Beyond)",
+    order: 1,
+
+    title: "Tomb → Jerusalem: The World Wakes Up",
+    tagLine: "Stones don’t stand a chance against resurrection power.",
+
+    approxDate: "Resurrection Sunday",
+    from: "Garden tomb",
+    to: "Jerusalem and surrounding areas",
+    distanceMi: 1,
+    distanceKm: 1.6,
+
+    travelParty: ["Risen Jesus", "Mary Magdalene", "Women disciples", "The Eleven"],
+    peopleMet: ["Mary Magdalene", "Other women", "Disciples"],
+
+    miracles: [
+      "Resurrection",
+      "Appearance through locked doors"
+    ],
+
+    keyMoments: [
+      "Mary finds the stone rolled away.",
+      "Jesus appears to her and calls her by name.",
+      "Jesus appears in locked room to frightened disciples.",
+      "Thomas later sees and believes."
+    ],
+
+    themes: [
+      "Jesus knows your name and calls you personally.",
+      "Doubt is not disqualified—bring it to Jesus.",
+      "Death doesn’t get the final word."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "28:1–10" },
+      { book: "Luke", ref: "24:1–49" },
+      { book: "John", ref: "20:1–29" }
+    ],
+
+    summary:
+      "Jesus rises from the dead and appears to His followers. Fear turns to joy, and doubt turns to faith as He reveals Himself alive again.",
+
+    youthTakeaway:
+      "Your story isn't over. If Jesus beat death, He can raise hope in your life too.",
+
+    cardBlurb:
+      "Tear-streaked eyes. An empty tomb. A name spoken that changes everything.",
+
+    storyboardBeat:
+      "Mary crying outside the open tomb, then Jesus appearing behind her. Locked room scene with disciples gasping as Jesus appears. Thomas touching Jesus’ wounds.",
+
+    visualPrompt:
+      "Animated empty tomb at sunrise, emotional reunion, peaceful resurrected figure in locked room.",
+
+    icon: "🌅",
+    colorHint: "from-amber-300 to-sky-300"
+  },
+
+  {
+    id: "5.2-emmaus",
+    phaseId: "phase5",
+    phaseTitle: "Death Defeated (Resurrection & Beyond)",
+    order: 2,
+
+    title: "Jerusalem → Emmaus: Hearts on Fire",
+    tagLine: "A mysterious Stranger turns heartbreak into burning hope.",
+
+    approxDate: "Resurrection Sunday",
+    from: "Jerusalem",
+    to: "Emmaus",
+    distanceMi: 7,
+    distanceKm: 11,
+
+    travelParty: ["Two disciples", "Jesus (unrecognized at first)"],
+    peopleMet: ["Cleopas and another disciple"],
+
+    miracles: [
+      "Eyes opened to recognize Jesus"
+    ],
+
+    keyMoments: [
+      "Two discouraged disciples walk home.",
+      "Jesus joins them but they don’t realize it.",
+      "He opens Scripture and explains everything.",
+      "Their eyes open when He breaks bread.",
+      "They sprint back to Jerusalem with joy."
+    ],
+
+    themes: [
+      "Jesus walks with you even when you don’t feel Him.",
+      "Scripture opens hearts to truth.",
+      "Hope moves you—sometimes it runs miles."
+    ],
+
+    scriptureRefs: [
+      { book: "Luke", ref: "24:13–35" }
+    ],
+
+    summary:
+      "Two disciples walk away from Jerusalem discouraged. Jesus joins them, opens Scripture, and reveals Himself in the breaking of bread. Hope explodes—they run back to tell the others.",
+
+    youthTakeaway:
+      "Even when you don’t feel God, He is walking right beside you. Don’t quit—your Emmaus moment is coming.",
+
+    cardBlurb:
+      "A long walk, a deep conversation, and a dinner that reveals everything.",
+
+    storyboardBeat:
+      "Road with late-afternoon light, Jesus walking beside two sad disciples. Animated Scripture scenes illustrating His explanations. Dinner table moment where eyes widen.",
+
+    visualPrompt:
+      "Animated dusty road, sunset lighting, three walking figures, warm dinner scene.",
+
+    icon: "🔥",
+    colorHint: "from-orange-300 to-red-300"
+  },
+
+  {
+    id: "5.3-galilee-commission-ascension",
+    phaseId: "phase5",
+    phaseTitle: "Death Defeated (Resurrection & Beyond)",
+    order: 3,
+
+    title: "Galilee → The World: The Mission Begins",
+    tagLine: "A mountain meeting. A worldwide assignment. A promise that still stands.",
+
+    approxDate: "40 days after resurrection",
+    from: "Jerusalem",
+    to: "Galilee → Jerusalem (Mount of Olives)",
+    distanceMi: 70,
+    distanceKm: 112,
+
+    travelParty: ["Jesus", "The Eleven", "Possibly other disciples"],
+    peopleMet: ["Disciples"],
+
+    miracles: [
+      "Ascension",
+      "Final instructions empowered by the Spirit"
+    ],
+
+    keyMoments: [
+      "Disciples meet Jesus on a mountain in Galilee.",
+      "Jesus gives the Great Commission.",
+      "Back near Jerusalem, Jesus blesses them.",
+      "He ascends as they watch.",
+      "Angels promise He will return."
+    ],
+
+    themes: [
+      "Every believer is sent.",
+      "The gospel is for all nations.",
+      "You are never alone—Jesus goes with you."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "28:16–20" },
+      { book: "Acts", ref: "1:1–11" }
+    ],
+
+    summary:
+      "Jesus gathers His followers, gives them the mission to make disciples of all nations, and ascends into heaven with the promise of His presence and return.",
+
+    youthTakeaway:
+      "If you follow Jesus, you have a purpose bigger than yourself. You’re part of a global story that’s still unfolding.",
+
+    cardBlurb:
+      "A mountain moment that sends a movement into motion.",
+
+    storyboardBeat:
+      "Galilee mountain sunrise, Jesus commissioning disciples. Cut to Mount of Olives with Jesus rising, disciples staring upward, angels appearing.",
+
+    visualPrompt:
+      "Animated mountaintop with golden sunrise, disciples gathered around radiant teacher, ascension scene with clouds of light.",
+
+    icon: "🌍",
+    colorHint: "from-blue-300 to-purple-400"
   }
 ];
 
