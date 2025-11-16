@@ -6,6 +6,7 @@ import PrayerWalk from './pages/PrayerWalk.jsx';
 import Journal from './pages/Journal.jsx';
 import Discover from './pages/Discover.jsx';
 import Layout from './components/Layout.jsx';
+import WalkFeedPage from './app/walk/feed/page.tsx';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/" element={<JourneyList />} />
           <Route path="/journey/:id" element={<JourneyDetail />} />
           <Route path="/walk/:id" element={<WalkMode />} />
+          <Route path="/walk/feed" element={<WalkFeedPage />} />
           <Route path="/prayer/:id" element={<PrayerWalk />} />
           <Route path="/discover" element={<Discover />} />
           <Route path="/journal" element={<Journal />} />
