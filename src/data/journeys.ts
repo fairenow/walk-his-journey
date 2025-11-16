@@ -998,6 +998,390 @@ export const journeyScenes: JourneyScene[] = [
 
     icon: "❓",
     colorHint: "from-purple-200 to-indigo-300"
+  },
+
+  // =========================
+  // PHASE 4 – THE ROAD TO THE CROSS
+  // =========================
+
+  {
+    id: "4.1-galilee-perea",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 1,
+
+    title: "Galilee → Perea: Countdown to the Cross",
+    tagLine: "Crowds swell. Conversations sharpen. The mission accelerates.",
+
+    approxDate: "Final ministry year",
+    from: "Galilee",
+    to: "Perea (beyond the Jordan)",
+    distanceMi: 80,
+    distanceKm: 130,
+
+    travelParty: ["Jesus", "Disciples", "Large crowds"],
+    peopleMet: ["Pharisees", "Children & their parents", "Rich young ruler"],
+
+    miracles: [
+      "Various healings not location-specific"
+    ],
+
+    keyMoments: [
+      "Teaching on marriage, divorce, and commitment.",
+      "Blessing children while disciples try to send them away.",
+      "Rich young ruler walks away from Jesus sad.",
+      "Jesus continues toward Jerusalem with determination."
+    ],
+
+    themes: [
+      "Jesus embraces children and the overlooked.",
+      "Following Him means surrender—not just rule-keeping.",
+      "Your heart posture matters more than your achievements."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "19:1–30" },
+      { book: "Mark", ref: "10:1–31" },
+      { book: "Luke", ref: "18:15–30" }
+    ],
+
+    summary:
+      "On the way to Jerusalem, Jesus travels through Perea. He welcomes children, challenges a rich seeker, teaches tough truths, and keeps moving toward His destiny.",
+
+    youthTakeaway:
+      "Jesus is not just inviting you to believe something—He’s inviting you to follow Him with your whole life. What you cling to most tightly is often what He asks you to trust Him with.",
+
+    cardBlurb:
+      "Kids run up. A rich man walks away. Jesus keeps walking forward.",
+
+    storyboardBeat:
+      "Riverside scenes with parents pushing through the crowd, Jesus kneeling to bless children. Rich young ruler leaving with slumped shoulders. Jesus’ face set like flint toward Jerusalem.",
+
+    visualPrompt:
+      "Animated riverside region, children smiling, wealthy young man walking away sadly, Jesus teaching crowds by the water.",
+
+    icon: "🚶‍♂️",
+    colorHint: "from-yellow-200 to-orange-300"
+  },
+
+  {
+    id: "4.2-perea-jericho",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 2,
+
+    title: "Perea → Jericho: Lost Causes Found",
+    tagLine: "A blind man sees. A corrupt man changes. Grace overturns everything.",
+
+    approxDate: "Last weeks before the cross",
+    from: "Perea",
+    to: "Jericho",
+    distanceMi: 20,
+    distanceKm: 32,
+
+    travelParty: ["Jesus", "Disciples", "Crowds"],
+    peopleMet: ["Bartimaeus and other blind beggars", "Zacchaeus the tax collector"],
+
+    miracles: [
+      "Blind men healed outside Jericho"
+    ],
+
+    keyMoments: [
+      "Blind beggars cry out, ‘Son of David, have mercy!’",
+      "Jesus restores their sight.",
+      "Zacchaeus climbs a tree to see Jesus.",
+      "Jesus invites Himself to Zacchaeus’ house.",
+      "Zacchaeus repents with radical generosity."
+    ],
+
+    themes: [
+      "Jesus sees people society tries to silence.",
+      "Salvation changes how you handle money and wrongs.",
+      "No one is too far gone for grace."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "20:29–34" },
+      { book: "Mark", ref: "10:46–52" },
+      { book: "Luke", ref: "18:35–43" },
+      { book: "Luke", ref: "19:1–10" }
+    ],
+
+    summary:
+      "As Jesus approaches Jericho, He heals blind men who refuse to stay quiet. Inside the city, He calls Zacchaeus out of a sycamore tree and transforms his heart and priorities.",
+
+    youthTakeaway:
+      "Jesus doesn’t just heal what’s broken; He mends what’s corrupt. He can restore your vision—and your values.",
+
+    cardBlurb:
+      "Shouts from the roadside. A man in a tree. A Savior with time for both.",
+
+    storyboardBeat:
+      "Crowded Jericho road, blind beggar shouting while crowd tries to hush him. Sudden clarity as sight returns. Then high camera angle looking down from Zacchaeus’ tree as Jesus looks up and smiles.",
+
+    visualPrompt:
+      "Animated ancient city gates, blind man crying out, wealthy man perched in tree, joyful transformation scene.",
+
+    icon: "🌳",
+    colorHint: "from-amber-200 to-green-300"
+  },
+
+  {
+    id: "4.3-jericho-jerusalem",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 3,
+
+    title: "Jericho → Jerusalem: The King on a Donkey",
+    tagLine: "Palm branches wave. Prophecies unfold. The countdown accelerates.",
+
+    approxDate: "Final week",
+    from: "Jericho",
+    to: "Jerusalem",
+    distanceMi: 17,
+    distanceKm: 27,
+
+    travelParty: ["Jesus", "The Twelve", "Passover pilgrims"],
+    peopleMet: ["Mary, Martha, Lazarus", "Crowds shouting ‘Hosanna!’"],
+
+    miracles: [
+      "Raising of Lazarus (prior days)",
+      "Prophetic fulfillment of Zechariah 9:9"
+    ],
+
+    keyMoments: [
+      "Steep climb from Jericho to Jerusalem.",
+      "Jesus stays in Bethany with Mary, Martha, Lazarus.",
+      "Crowds welcome Him with palm branches.",
+      "Jesus enters Jerusalem riding a young donkey."
+    ],
+
+    themes: [
+      "Jesus is a different kind of King—gentle, not ruthless.",
+      "Crowds can celebrate you today and question you tomorrow.",
+      "Prophecy meets reality in Jesus’ arrival."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "21:1–11" },
+      { book: "Mark", ref: "11:1–10" },
+      { book: "Luke", ref: "19:28–44" },
+      { book: "John", ref: "12:1–19" }
+    ],
+
+    summary:
+      "Jesus climbs steep roads to Jerusalem, stays with friends in Bethany, then enters the city on a donkey as crowds spread cloaks and palm branches, shouting ‘Hosanna!’",
+
+    youthTakeaway:
+      "Jesus doesn’t lead with force—He leads with humility. True strength doesn’t have to show off.",
+
+    cardBlurb:
+      "A humble King on a borrowed donkey. Cheers echo across Jerusalem.",
+
+    storyboardBeat:
+      "Jericho desert path winding upward. Jesus riding a donkey cresting the Mount of Olives. Clouds of dust, palm branches, excited faces, and a bittersweet look in Jesus’ eyes.",
+
+    visualPrompt:
+      "Animated ancient road into Jerusalem, palm branches waving, joyful crowds, gentle teacher figure on donkey.",
+
+    icon: "🌿",
+    colorHint: "from-green-200 to-gold-300"
+  },
+
+  {
+    id: "4.4-bethany-jerusalem",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 4,
+
+    title: "Bethany ↔ Jerusalem: Confrontation & Compassion",
+    tagLine: "Jesus cleanses the Temple, confronts corruption, and teaches with fire.",
+
+    approxDate: "Sunday–Thursday of Passion Week",
+    from: "Bethany",
+    to: "Jerusalem (Temple)",
+    distanceMi: 2,
+    distanceKm: 3,
+
+    travelParty: ["Jesus", "Disciples"],
+    peopleMet: [
+      "Money changers",
+      "Chief priests",
+      "Pharisees",
+      "Crowds",
+      "Widow giving two coins"
+    ],
+
+    miracles: [
+      "Cursing of the fig tree",
+      "Various healings in the Temple courts"
+    ],
+
+    keyMoments: [
+      "Jesus curses a fruitless fig tree.",
+      "He clears the Temple of corruption.",
+      "He debates religious leaders all week.",
+      "He teaches on end times, love, and judgment.",
+      "A widow drops her two coins—Jesus praises her gift."
+    ],
+
+    themes: [
+      "God cares about fruitfulness, not just appearances.",
+      "Jesus hates injustice and exploitation.",
+      "Real devotion is about sacrifice, not show."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "21–25" },
+      { book: "Mark", ref: "11–13" },
+      { book: "Luke", ref: "19:45–21:38" }
+    ],
+
+    summary:
+      "During Passion Week, Jesus commutes between Bethany and Jerusalem. He clears the Temple, confronts leaders, teaches boldly, and prepares His disciples for what’s ahead.",
+
+    youthTakeaway:
+      "Jesus is not passive about injustice—He confronts it. Your faith should change how you treat people, especially the vulnerable.",
+
+    cardBlurb:
+      "Tables fly. Leaders fume. Truth hits like lightning.",
+
+    storyboardBeat:
+      "Jesus flipping tables; coins scattering; religious leaders’ shocked faces. Fig tree withered by morning. Jesus teaching crowds on Temple steps with intensity.",
+
+    visualPrompt:
+      "Animated Temple courts, busy crowds, dramatic confrontation scene, Jesus teaching passionately.",
+
+    icon: "⚖️",
+    colorHint: "from-red-300 to-amber-300"
+  },
+
+  {
+    id: "4.5-last-supper-gethsemane",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 5,
+
+    title: "Upper Room → Gethsemane: The Longest Night",
+    tagLine: "A meal of love. A prayer of agony. A kiss of betrayal.",
+
+    approxDate: "Thursday night",
+    from: "Upper Room (Jerusalem)",
+    to: "Gethsemane (Mount of Olives)",
+    distanceMi: 1,
+    distanceKm: 1.6,
+
+    travelParty: ["Jesus", "The Eleven", "(Later) Judas and soldiers"],
+    peopleMet: ["Disciples", "Judas", "Temple guards"],
+
+    miracles: [
+      "Institution of the Lord’s Supper",
+      "Healing of servant’s ear"
+    ],
+
+    keyMoments: [
+      "Jesus washes His disciples’ feet.",
+      "He shares the Passover meal and explains the new covenant.",
+      "He prays in agony while disciples fall asleep.",
+      "Judas arrives with soldiers.",
+      "Jesus is arrested after healing a wounded servant."
+    ],
+
+    themes: [
+      "Jesus serves even those who will betray Him.",
+      "Real strength is surrender to God’s will.",
+      "Love stays steady even when friends fail."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "26" },
+      { book: "Mark", ref: "14" },
+      { book: "Luke", ref: "22" },
+      { book: "John", ref: "13–18" }
+    ],
+
+    summary:
+      "Jesus shares His last meal with His disciples, washes their feet, and prays in Gethsemane. Judas arrives with soldiers, and Jesus is arrested after showing compassion even in the chaos.",
+
+    youthTakeaway:
+      "Jesus knows what it feels like to be betrayed, abandoned, and misunderstood. Yet He still chooses love. He understands your deepest emotional pain.",
+
+    cardBlurb:
+      "Bread broken. Tears falling. Torches approaching.",
+
+    storyboardBeat:
+      "Dimly lit upper room, intimate meal, Jesus kneeling to wash feet. Nighttime garden scene, Jesus sweating like blood, disciples asleep. Torches glow as soldiers approach.",
+
+    visualPrompt:
+      "Animated upper room with candlelight, foot-washing scene, dark olive grove with moonlit trees and approaching torches.",
+
+    icon: "🍞",
+    colorHint: "from-indigo-200 to-blue-300"
+  },
+
+  {
+    id: "4.6-trial-cross-tomb",
+    phaseId: "phase4",
+    phaseTitle: "The Road to the Cross (Perea, Jericho, Jerusalem)",
+    order: 6,
+
+    title: "Jerusalem → Golgotha: Love on a Cross",
+    tagLine: "Darkness falls. Curtains tear. The world changes forever.",
+
+    approxDate: "Friday (Good Friday)",
+    from: "Jerusalem",
+    to: "Golgotha → nearby tomb",
+    distanceMi: 1,
+    distanceKm: 1.6,
+
+    travelParty: ["Jesus", "Soldiers", "Women disciples", "John", "Crowds"],
+    peopleMet: ["Pilate", "Herod", "Roman soldiers", "Two criminals", "Women at the cross"],
+
+    miracles: [
+      "Darkness at noon",
+      "Temple curtain torn",
+      "Signs at His death"
+    ],
+
+    keyMoments: [
+      "Unjust trials before Jewish leaders, Herod, Pilate.",
+      "Scourging and crown of thorns.",
+      "Jesus carries His cross; Simon of Cyrene helps.",
+      "He forgives His executioners.",
+      "He promises paradise to a repentant criminal.",
+      "He dies with a loud cry: ‘It is finished.’"
+    ],
+
+    themes: [
+      "This is what love looks like.",
+      "Forgiveness is possible even in the deepest pain.",
+      "Jesus takes our place and absorbs our sin."
+    ],
+
+    scriptureRefs: [
+      { book: "Matthew", ref: "27" },
+      { book: "Mark", ref: "15" },
+      { book: "Luke", ref: "23" },
+      { book: "John", ref: "18–19" }
+    ],
+
+    summary:
+      "Jesus endures unjust trials, brutal suffering, and crucifixion. Darkness falls as He dies. His body is placed in a nearby tomb, watched by faithful women.",
+
+    youthTakeaway:
+      "You matter to Jesus so much that He took the weight of your sin, shame, fear, and mistakes onto Himself. You are not a mistake—your life was worth His sacrifice.",
+
+    cardBlurb:
+      "A cross on a hill. The world holding its breath.",
+
+    storyboardBeat:
+      "Slow-motion procession toward Golgotha. Cross raised against darkening sky. Curtain ripping inside Temple. Tearful women watching. Stone rolled across the tomb.",
+
+    visualPrompt:
+      "Animated crucifixion scene with respectful reverence: silhouetted cross against dark sky, grieving women, Temple curtain tearing symbolically.",
+
+    icon: "✝️",
+    colorHint: "from-red-500 to-purple-500"
   }
 ];
 
