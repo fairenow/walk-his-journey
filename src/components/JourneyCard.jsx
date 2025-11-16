@@ -4,6 +4,7 @@ import { getMiles } from '../utils/storage.js';
 export default function JourneyCard({ journey }) {
   const miles = getMiles(journey.id);
   const pct = Math.min((miles / journey.distanceMiles) * 100, 100);
+  const description = journey.summary ?? journey.description;
 
   return (
     <div className="bg-[color:var(--card-white)] rounded-2xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
@@ -18,7 +19,7 @@ export default function JourneyCard({ journey }) {
         <div className="text-2xl">{journey.icon ?? '👣'}</div>
       </div>
 
-      <p className="text-sm text-gray-700 mt-3">{journey.description}</p>
+      <p className="text-sm text-gray-700 mt-3">{description}</p>
 
       <div className="mt-4">
         <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
@@ -36,6 +37,28 @@ export default function JourneyCard({ journey }) {
           </Link>
         </div>
       </div>
+
+      {journey.milestones && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {journey.milestones.map((m) => {
+            const unlocked = miles >= m.thresholdMiles;
+            return (
+              <span
+                key={m.label}
+                className={
+                  'px-2 py-1 rounded-full text-[10px] font-medium ' +
+                  (unlocked
+                    ? 'bg-[color:var(--sunrise-gold)] text-[color:var(--ink-dark)]'
+                    : 'bg-gray-200 text-gray-500')
+                }
+              >
+                {unlocked ? '✓ ' : '• '}
+                {m.label}
+              </span>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
