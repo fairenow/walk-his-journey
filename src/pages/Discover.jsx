@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { journeys } from "../data/journeys";
+import { journeyScenes, phases } from "../data/journeys.ts";
 
 export default function Discover() {
-  const journeysByStage = journeys.reduce((acc, j) => {
-    acc[j.stage] = acc[j.stage] || [];
-    acc[j.stage].push(j);
-    return acc;
-  }, {});
-
-  const stages = Object.keys(journeysByStage);
+  const orderedPhases = [...phases].sort((a, b) => a.order - b.order);
+  const scenesByPhase = orderedPhases.map((phase) => ({
+    phase,
+    scenes: journeyScenes
+      .filter((scene) => scene.phaseId === phase.id)
+      .sort((a, b) => a.order - b.order),
+  }));
 
   return (
     <div className="space-y-10">
@@ -23,24 +23,32 @@ export default function Discover() {
         </p>
       </section>
 
-      {stages.map(stage => (
-        <section key={stage} className="space-y-3">
-          <h2 className="text-lg font-semibold">{stage}</h2>
+      {scenesByPhase.map(({ phase, scenes }) => (
+        <section key={phase.id} className="space-y-4">
+          <div className="space-y-1">
+            <h2 className="text-lg font-semibold text-slate-900">{phase.title}</h2>
+            <p className="text-sm text-slate-600 max-w-3xl">{phase.description}</p>
+          </div>
+
           <div className="grid gap-4 md:grid-cols-2">
-            {journeysByStage[stage].map(j => (
+            {scenes.map((scene) => (
               <Link
-                key={j.id}
-                to={`/journey/${j.id}`}
-                className="bg-white/90 rounded-2xl p-4 shadow-sm border border-white/60 hover:shadow-md transition-shadow"
+                key={scene.id}
+                to={`/journey/${scene.id}`}
+                className="bg-white/90 rounded-2xl p-5 shadow-sm border border-white/60 hover:shadow-md transition-shadow"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{j.icon}</span>
-                  <div>
-                    <p className="text-sm font-semibold">{j.title}</p>
-                    <p className="text-xs text-gray-600 mt-1">
-                      {j.summary}
-                    </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-3xl" aria-hidden>
+                      {scene.icon}
+                    </span>
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-slate-900">{scene.title}</p>
+                      <p className="text-xs text-[color:var(--deep-teal)]">{scene.approxDate}</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{scene.cardBlurb}</p>
+                    </div>
                   </div>
+                  <span className="text-xs font-medium text-[color:var(--deep-teal)]">Open →</span>
                 </div>
               </Link>
             ))}
