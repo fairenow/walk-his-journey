@@ -1,15 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
-import { journeys } from '../data/journeys.js';
 import { journeyScenes } from '../data/journeys.ts';
-import { getMiles } from '../utils/storage.js';
-import ProgressBar from '../components/ProgressBar.jsx';
-import Button from '../components/Button.jsx';
 
 export default function JourneyDetail() {
   const { id } = useParams();
-  const journey = journeyScenes.find((scene) => scene.id === id) ?? journeys.find((j) => j.id === id);
+  const scene = journeyScenes.find((item) => item.id === id);
 
-  if (!journey) {
+  if (!scene) {
     return (
       <div className="space-y-4">
         <p className="text-sm text-slate-500">Journey not found.</p>
@@ -20,71 +16,104 @@ export default function JourneyDetail() {
     );
   }
 
-  const miles = getMiles(id);
-  const totalMiles = journey.distanceMi ?? journey.distanceMiles ?? 0;
-  const pct = totalMiles ? Math.min((miles / totalMiles) * 100, 100) : 0;
-  const description = journey.summary ?? journey.cardBlurb ?? journey.description ?? journey.tagLine;
-  const scriptureList = journey.scriptureRefs
-    ? journey.scriptureRefs.map((ref) => `${ref.book} ${ref.ref}`).join(', ')
-    : journey.scriptures?.join(', ') ?? journey.scripture ?? '—';
-  const unlockedMilestones = (journey.milestones || []).filter((m) => miles >= m.thresholdMiles);
-
   return (
     <div className="space-y-6">
       <Link to="/" className="text-blue-700">
         ← Back
       </Link>
 
-      <div className="rounded-xl bg-white p-6 shadow-sm space-y-6">
-        <header className="space-y-2">
-          <p className="text-xs uppercase font-semibold text-[color:var(--deep-teal)]">Journey Detail</p>
-          <h1 className="text-3xl font-bold mt-1 flex items-center gap-2">
-            <span>{journey.icon ?? '👣'}</span>
-            <span>{journey.title}</span>
-          </h1>
-          {journey.approxDate && <p className="text-xs text-[color:var(--deep-teal)]">{journey.approxDate}</p>}
-          <p className="text-sm text-gray-600 mt-1">{description}</p>
-          <p className="text-xs text-gray-500 mt-1">Scriptures: {scriptureList}</p>
-        </header>
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-50 via-white to-indigo-50 shadow-xl ring-1 ring-slate-200">
+        <div className="absolute -left-10 -top-10 h-40 w-40 rotate-6 rounded-full bg-gradient-to-br from-sky-200/50 to-indigo-200/50 blur-3xl" />
+        <div className="absolute -right-14 bottom-4 h-32 w-32 -rotate-12 rounded-full bg-gradient-to-br from-indigo-200/50 to-purple-200/40 blur-3xl" />
 
-        <section className="bg-white/90 rounded-2xl p-5 shadow space-y-3">
-          <div>
-            <h2 className="text-sm font-semibold text-gray-700">Your Progress</h2>
-            <div className="mt-2 space-y-2">
-              <ProgressBar percent={pct} />
-              <p className="text-sm text-gray-700">
-                {totalMiles ? `${miles} / ${totalMiles} miles logged` : `${miles} miles logged`}
+        <header className="relative border-b border-white/60 px-6 py-8 sm:px-10">
+          <div className="flex items-start gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 text-3xl shadow-inner ring-1 ring-white/70">
+              {scene.icon || '🎬'}
+            </div>
+            <div className="flex-1 space-y-3">
+              <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase text-[color:var(--deep-teal)]">
+                <span className="rounded-full bg-white/80 px-3 py-1 shadow-sm ring-1 ring-white">Storyboard Scene</span>
+                {scene.approxDate && (
+                  <span className="rounded-full bg-white/70 px-3 py-1 text-[color:var(--deep-teal)] shadow-sm ring-1 ring-white/80">{scene.approxDate}</span>
+                )}
+              </div>
+              <h1 className="text-3xl font-bold text-slate-900 drop-shadow-sm sm:text-4xl">{scene.title}</h1>
+              <p className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-3 text-sm font-semibold text-amber-900 shadow-sm ring-1 ring-amber-200">
+                <span className="text-lg">✨</span>
+                <span>{scene.tagLine}</span>
               </p>
+              <p className="text-sm text-slate-600">{scene.phaseTitle}</p>
             </div>
           </div>
+        </header>
 
-          <div className="flex flex-wrap gap-3">
-            <Link to={`/walk/${journey.id}`} className="btn-primary">
-              Walk This Journey →
-            </Link>
-            <Button variant="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              Jump to Top
-            </Button>
-          </div>
-        </section>
+        <div className="relative space-y-5 px-6 py-8 sm:px-10">
+          <Section title="What Happened" accent="bg-sky-500">
+            <p className="text-base leading-relaxed text-slate-800">{scene.summary}</p>
+          </Section>
 
-        <section className="bg-white/90 rounded-2xl p-5 shadow">
-          <h2 className="text-sm font-semibold text-gray-700 mb-2">Unlocked Insights</h2>
-          {unlockedMilestones.length === 0 && (
-            <p className="text-sm text-gray-600">
-              Start walking this journey to unlock more about what Jesus did here.
-            </p>
-          )}
-          <div className="space-y-3">
-            {unlockedMilestones.map((m) => (
-              <div key={m.label}>
-                <h3 className="text-sm font-semibold">{m.label}</h3>
-                <p className="text-sm text-gray-700 mt-1">{m.content}</p>
+          <Section title="Scene Highlights" accent="bg-indigo-500">
+            <ul className="space-y-2 text-slate-800">
+              {scene.keyMoments.map((moment) => (
+                <li key={moment} className="flex items-start gap-3 rounded-xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-slate-100">
+                  <span className="mt-0.5 text-indigo-500">•</span>
+                  <span className="leading-relaxed">{moment}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+
+          <Section title="Why It Matters" accent="bg-amber-500">
+            <div className="space-y-4">
+              <p className="text-base leading-relaxed text-slate-800">{scene.youthTakeaway}</p>
+              <div className="flex flex-wrap gap-2">
+                {scene.themes.map((theme) => (
+                  <span key={theme} className="rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-800 ring-1 ring-amber-200">
+                    {theme}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </Section>
+
+          <Section title="In Your Bible" accent="bg-emerald-500">
+            <div className="space-y-2">
+              {scene.scriptureRefs.map((ref) => (
+                <div key={`${ref.book}-${ref.ref}`} className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-emerald-100">
+                  <span className="text-emerald-600">📖</span>
+                  <span className="text-slate-800 font-semibold">{ref.book}</span>
+                  <span className="text-slate-600">{ref.ref}</span>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="For Artists" accent="bg-purple-500">
+            <div className="space-y-3 text-slate-800">
+              <p className="leading-relaxed">
+                <span className="font-semibold">Storyboard Beat:</span> {scene.storyboardBeat}
+              </p>
+              <p className="leading-relaxed text-slate-700">
+                <span className="font-semibold">Visual Prompt:</span> {scene.visualPrompt}
+              </p>
+            </div>
+          </Section>
+        </div>
       </div>
     </div>
+  );
+}
+
+function Section({ title, accent, children }) {
+  return (
+    <section className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-lg shadow-slate-200/40">
+      <div className={`absolute -left-8 top-4 h-8 w-8 rotate-12 rounded-full ${accent} blur-md opacity-60`} />
+      <div className="relative flex items-center gap-2">
+        <span className={`h-1.5 w-6 rounded-full ${accent}`} />
+        <h2 className="text-sm font-semibold tracking-wide text-slate-800 uppercase">{title}</h2>
+      </div>
+      <div className="relative mt-4 space-y-3 text-sm text-slate-700">{children}</div>
+    </section>
   );
 }
