@@ -1,12 +1,13 @@
 import { Link, useParams } from 'react-router-dom';
 import { journeys } from '../data/journeys.js';
+import { journeyScenes } from '../data/journeys.ts';
 import { getMiles } from '../utils/storage.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Button from '../components/Button.jsx';
 
 export default function JourneyDetail() {
   const { id } = useParams();
-  const journey = journeys.find((j) => j.id === id);
+  const journey = journeyScenes.find((scene) => scene.id === id) ?? journeys.find((j) => j.id === id);
 
   if (!journey) {
     return (
@@ -20,10 +21,13 @@ export default function JourneyDetail() {
   }
 
   const miles = getMiles(id);
-  const pct = Math.min((miles / journey.distanceMiles) * 100, 100);
+  const totalMiles = journey.distanceMi ?? journey.distanceMiles ?? 0;
+  const pct = totalMiles ? Math.min((miles / totalMiles) * 100, 100) : 0;
+  const description = journey.summary ?? journey.cardBlurb ?? journey.description ?? journey.tagLine;
+  const scriptureList = journey.scriptureRefs
+    ? journey.scriptureRefs.map((ref) => `${ref.book} ${ref.ref}`).join(', ')
+    : journey.scriptures?.join(', ') ?? journey.scripture ?? '—';
   const unlockedMilestones = (journey.milestones || []).filter((m) => miles >= m.thresholdMiles);
-  const description = journey.summary ?? journey.description;
-  const scriptureList = journey.scriptures?.join(', ') ?? journey.scripture ?? '—';
 
   return (
     <div className="space-y-6">
@@ -32,13 +36,14 @@ export default function JourneyDetail() {
       </Link>
 
       <div className="rounded-xl bg-white p-6 shadow-sm space-y-6">
-        <header>
+        <header className="space-y-2">
           <p className="text-xs uppercase font-semibold text-[color:var(--deep-teal)]">Journey Detail</p>
           <h1 className="text-3xl font-bold mt-1 flex items-center gap-2">
-            <span>{journey.icon}</span>
+            <span>{journey.icon ?? '👣'}</span>
             <span>{journey.title}</span>
           </h1>
-          <p className="text-sm text-gray-600 mt-2">{description}</p>
+          {journey.approxDate && <p className="text-xs text-[color:var(--deep-teal)]">{journey.approxDate}</p>}
+          <p className="text-sm text-gray-600 mt-1">{description}</p>
           <p className="text-xs text-gray-500 mt-1">Scriptures: {scriptureList}</p>
         </header>
 
@@ -48,7 +53,7 @@ export default function JourneyDetail() {
             <div className="mt-2 space-y-2">
               <ProgressBar percent={pct} />
               <p className="text-sm text-gray-700">
-                {miles} / {journey.distanceMiles} miles logged
+                {totalMiles ? `${miles} / ${totalMiles} miles logged` : `${miles} miles logged`}
               </p>
             </div>
           </div>
