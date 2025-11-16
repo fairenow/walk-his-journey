@@ -1,10 +1,26 @@
 import { Link } from 'react-router-dom';
 import JourneyCard from '../components/JourneyCard.jsx';
 import Button from '../components/Button.jsx';
-import { journeys } from '../data/journeys.js';
+import { journeyScenes } from '../data/journeys.ts';
 import { clearProgress } from '../utils/storage.js';
 
 export default function JourneyList() {
+  const scenesByPhase = Array.from(
+    journeyScenes.reduce((map, scene) => {
+      if (!map.has(scene.phaseTitle)) {
+        map.set(scene.phaseTitle, []);
+      }
+      map.get(scene.phaseTitle).push(scene);
+      return map;
+    }, new Map())
+  ).map(([phaseTitle, scenes]) => ({
+    phaseTitle,
+    scenes: scenes.sort((a, b) => a.order - b.order),
+    order: Math.min(...scenes.map((s) => s.order)),
+  }));
+
+  scenesByPhase.sort((a, b) => a.order - b.order);
+
   return (
     <div className="space-y-6">
       <section className="space-y-4">
@@ -28,11 +44,21 @@ export default function JourneyList() {
         </Link>
       </div>
 
-      <section className="grid gap-4 md:grid-cols-2">
-        {journeys.map((journey) => (
-          <JourneyCard key={journey.id} journey={journey} />
+      <div className="space-y-8">
+        {scenesByPhase.map(({ phaseTitle, scenes }) => (
+          <section key={phaseTitle} className="space-y-3">
+            <div className="flex items-baseline gap-2">
+              <div className="h-2 w-2 rounded-full bg-[color:var(--deep-teal)]" />
+              <h2 className="text-xl font-semibold text-slate-900">{phaseTitle}</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {scenes.map((scene) => (
+                <JourneyCard key={scene.id} journey={scene} />
+              ))}
+            </div>
+          </section>
         ))}
-      </section>
+      </div>
     </div>
   );
 }
