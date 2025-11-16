@@ -25,6 +25,7 @@ export type JourneyScene = {
   peopleMet: string[];
   miracles: string[];
   keyMoments: string[]; // bullet moments in story
+  moments: string[]; // playable feed moments, can mirror keyMoments
   themes: string[]; // youth-friendly themes
   scriptureRefs: ScriptureRef[];
 
@@ -41,6 +42,8 @@ export type JourneyScene = {
   icon: string; // emoji or short tag
   colorHint: string; // Tailwind-ish string like "from-amber-300 to-rose-400"
 };
+
+type JourneySceneInput = Omit<JourneyScene, "moments"> & { moments?: string[] };
 
 export type JourneyPhase = {
   id: string;
@@ -94,7 +97,7 @@ export const phases: JourneyPhase[] = [
   }
 ];
 
-export const journeyScenes: JourneyScene[] = [
+const journeySceneInputs: JourneySceneInput[] = [
   // =========================
   // PHASE 0 – BEFORE PUBLIC MINISTRY
   // =========================
@@ -1569,4 +1572,9 @@ export const journeyScenes: JourneyScene[] = [
     colorHint: "from-blue-300 to-purple-400"
   }
 ];
+
+export const journeyScenes: JourneyScene[] = journeySceneInputs.map((scene) => ({
+  ...scene,
+  moments: scene.moments ?? scene.keyMoments,
+}));
 
