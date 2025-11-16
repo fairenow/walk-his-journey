@@ -1,38 +1,40 @@
 import { Link } from 'react-router-dom';
 import { getMiles } from '../utils/storage.js';
-import ProgressBar from './ProgressBar.jsx';
 
 export default function JourneyCard({ journey }) {
   const miles = getMiles(journey.id);
   const pct = Math.min((miles / journey.distanceMiles) * 100, 100);
 
   return (
-    <div className="border rounded-xl p-6 shadow-[0_4px_12px_rgba(0,0,0,0.08)] bg-white transition hover:shadow-[0_6px_18px_rgba(0,0,0,0.12)] hover:-translate-y-1">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1">
-          <div className="text-3xl mb-2" aria-hidden="true">{journey.icon}</div>
-          <h2 className="text-lg font-semibold text-slate-900">{journey.title}</h2>
-          <p className="text-sm text-slate-500">Total: {journey.distanceMiles} mi</p>
+    <div className="bg-[color:var(--card-white)] rounded-2xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-[color:var(--deep-teal)] font-semibold">
+            Journey
+          </p>
+          <h2 className="text-lg font-semibold mt-1">{journey.title}</h2>
+          <p className="text-xs text-gray-500 mt-1">Total: {journey.distanceMiles} mi</p>
         </div>
-        <Link to={`/journey/${journey.id}`} className="text-sm font-medium text-blue-700">
-          Open →
-        </Link>
+        <div className="text-2xl">{journey.icon ?? '👣'}</div>
       </div>
 
-      <p className="mt-3 text-sm text-slate-700">{journey.description}</p>
+      <p className="text-sm text-gray-700 mt-3">{journey.description}</p>
 
-      <ProgressBar percent={pct} />
-
-      <div className="mt-3 flex items-center justify-between text-sm text-slate-600">
-        <span>
-          {miles} of {journey.distanceMiles} miles logged
-        </span>
-        <Link
-          to={`/walk/${journey.id}`}
-          className="px-4 py-2 bg-yellow-600 text-white rounded-full hover:bg-yellow-700 transition"
-        >
-          Continue →
-        </Link>
+      <div className="mt-4">
+        <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[color:var(--sunrise-gold)] to-[color:var(--sunset-orange)]"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <div className="flex justify-between mt-2 text-xs text-gray-600">
+          <span>
+            {miles} of {journey.distanceMiles} miles logged
+          </span>
+          <Link to={`/walk/${journey.id}`} className="text-[color:var(--deep-teal)] font-medium">
+            Continue →
+          </Link>
+        </div>
       </div>
     </div>
   );
