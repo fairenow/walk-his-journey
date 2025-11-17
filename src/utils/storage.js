@@ -33,13 +33,14 @@ export function getJournal() {
   return safeParse(localStorage.getItem(JOURNAL_STORAGE_KEY), []);
 }
 
-export function saveReflection(journeyId, text) {
+export function saveReflection(journeyId, text, title) {
   if (!isBrowser) return;
   const entries = getJournal();
   const now = new Date();
   entries.unshift({
     journeyId,
     text,
+    title: title?.trim() ?? '',
     date: now.toLocaleString(undefined, {
       dateStyle: 'medium',
       timeStyle: 'short',
