@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { journeyScenes } from "../data/journeys.ts";
 import useMovementTracker from "./useMovementTracker";
+import { FEED_STORAGE_KEY, WALK_STATE_STORAGE_KEY } from "../utils/storage.js";
 
 type WalkState = {
   currentSceneId: string;
@@ -29,8 +30,6 @@ type JourneyFeedEngine = {
   resetJourney: () => void;
 };
 
-const WALK_STATE_STORAGE_KEY = "whj_walk_state_v1";
-const FEED_STORAGE_KEY = "whj_feed_v1";
 const DISTANCE_PER_MOMENT_METERS = 25;
 
 const safeParse = <T,>(value: string | null): T | null => {

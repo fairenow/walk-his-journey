@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
+import { REFLECTIONS_STORAGE_KEY } from "../utils/storage.js";
 
 type ReflectionEntry = {
   text: string;
   createdAt: string;
 };
-
-const STORAGE_KEY = "whj_reflections_v1";
 
 const safeParse = <T,>(value: string | null): T | null => {
   if (!value) return null;
@@ -19,11 +18,11 @@ const safeParse = <T,>(value: string | null): T | null => {
 
 const useReflections = () => {
   const [reflections, setReflections] = useState<Record<string, ReflectionEntry>>(() => {
-    return safeParse<Record<string, ReflectionEntry>>(localStorage.getItem(STORAGE_KEY)) ?? {};
+    return safeParse<Record<string, ReflectionEntry>>(localStorage.getItem(REFLECTIONS_STORAGE_KEY)) ?? {};
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(reflections));
+    localStorage.setItem(REFLECTIONS_STORAGE_KEY, JSON.stringify(reflections));
   }, [reflections]);
 
   const saveReflection = useCallback((messageId: string, text: string) => {
