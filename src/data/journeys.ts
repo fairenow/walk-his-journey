@@ -311,6 +311,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "As He comes up out of the water, the sky opens.",
       "The Spirit descends, and the Father’s voice announces Jesus publicly."
     ],
+    moments: [
+      "Jesus walks away from the quiet workshop in Nazareth toward the river.",
+      "He joins the same baptism line as everyone else, no VIP treatment.",
+      "John hesitates, but Jesus insists on stepping under the water.",
+      "As He rises, the sky rips open and light floods the riverbank.",
+      "A dove-like glow settles on Him—the Holy Spirit resting and empowering.",
+      "The Father’s voice declares love over Him before any miracles are done.",
+      "Crowds whisper, wondering who this humble man really is."
+    ],
     themes: [
       "Jesus identifies with ordinary sinners even though He’s sinless.",
       "The Trinity shows up in one powerful scene: Father, Son, Spirit.",
@@ -358,6 +367,14 @@ const journeySceneInputs: JourneySceneInput[] = [
       "After 40 days of fasting, temptation hits at full force.",
       "Satan attacks Jesus’ identity and mission with twisted offers.",
       "Jesus responds each time with Scripture, staying faithful."
+    ],
+    moments: [
+      "Fresh from baptism, the Spirit guides Jesus into the silent wild.",
+      "Forty long days pass with no food, only prayer and grit.",
+      "The enemy whispers shortcuts: bread from stones, fame without the cross.",
+      "Jesus fires back with Scripture instead of arguments.",
+      "He refuses to jump for applause or bow for power.",
+      "Angels care for Him as He walks out stronger than He entered."
     ],
     themes: [
       "Your private battles prepare you for your public calling.",
@@ -410,6 +427,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He moves to Capernaum by the Sea of Galilee.",
       "He calls fishermen to follow Him and begins healing and delivering people."
     ],
+    moments: [
+      "Back in His hometown synagogue, Jesus reads Isaiah and quietly claims it.",
+      "Wonder shifts to rage; neighbors drag Him toward a cliff edge.",
+      "He walks through the angry crowd untouched and keeps going.",
+      "Jesus settles in Capernaum, swapping carpenter tools for a lakeside mission base.",
+      "He looks ordinary fishermen in the eye and invites them to follow.",
+      "At sundown, the town shows up with sickness and fear—and leaves healed and free.",
+      "What Nazareth pushed away, Galilee embraces."
+    ],
     themes: [
       "Sometimes the people who knew your past struggle to see your calling.",
       "Rejection doesn’t cancel your mission; it can redirect it.",
@@ -456,6 +482,14 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Mary brings the problem to Jesus and tells the servants to obey Him.",
       "Jesus has servants fill jars with water and take some to the master.",
       "The water has become wine; the party is saved, and only a few know why."
+    ],
+    moments: [
+      "Jesus shows up to celebrate with friends and family in Cana.",
+      "The music slows as whispers spread—there’s no wine left.",
+      "Mary quietly points the crisis to Jesus and tells servants to trust Him.",
+      "Stone jars splash full of water; no one knows what He’s planning.",
+      "The master sips and blinks—it’s the best drink of the night.",
+      "Joy roars back, and the disciples realize this gentle miracle is a sign."
     ],
     themes: [
       "Jesus cares about regular, human moments like celebrations and friendships.",
@@ -509,6 +543,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Jesus forgives sins publicly, shaking religious categories.",
       "He calls a tax collector, Matthew/Levi, to follow Him."
     ],
+    moments: [
+      "Before sunrise, Jesus heads from village to village with His crew.",
+      "He teaches in small synagogues and people hear authority they’ve never felt.",
+      "A leper kneels in the street; Jesus touches the untouchable and skin clears.",
+      "A packed house erupts as friends rip open a roof to lower their paralyzed buddy.",
+      "Jesus forgives him first, then tells him to walk—and he does.",
+      "At a tax booth, Jesus locks eyes with Matthew and offers a new life.",
+      "Dinner fills with outsiders as religious leaders wonder how grace can sit at that table."
+    ],
     themes: [
       "Jesus runs toward people others avoid.",
       "Faith sometimes tears through ceilings to get to Jesus.",
@@ -561,6 +604,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He teaches on anger, lust, enemies, giving, prayer, and worry.",
       "He calls His listeners to build on rock, not sand."
     ],
+    moments: [
+      "Crowds climb the hill carrying questions, sickness, and curiosity.",
+      "Jesus sits and His disciples lean in close to catch every word.",
+      "He blesses the poor in spirit, the meek, the merciful—the people usually overlooked.",
+      "He calls His followers salt and light, made to change the flavor of the world.",
+      "Hard topics surface: anger, lust, enemies, generosity, prayer, and worry.",
+      "He teaches the Lord’s Prayer and invites them to trust the Father’s care.",
+      "Jesus ends with a picture: build your life on rock by actually living what He says."
+    ],
     themes: [
       "Jesus blesses people the world overlooks.",
       "Following Him means heart change, not just behavior change.",
@@ -608,6 +660,13 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He is moved with compassion and tells her not to cry.",
       "He touches the bier, speaks to the dead young man, and raises him.",
       "Fear and praise erupt; news spreads everywhere."
+    ],
+    moments: [
+      "Two crowds collide at Nain’s gate—one mourning, one following Jesus.",
+      "Jesus locks eyes with a widow whose only son lies still and silent.",
+      "He tells her not to cry and places a hand on the bier, stopping the march.",
+      "His voice cuts through grief: the young man sits up breathing again.",
+      "Shock turns to celebration as the town realizes God has visited them."
     ],
     themes: [
       "Jesus sees your pain before you say a word.",
@@ -674,6 +733,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "The man becomes a missionary to his region."
     ],
 
+    moments: [
+      "The disciples push off at dusk while Jesus naps in the boat.",
+      "Wind explodes into waves; panic rises until they shake Him awake.",
+      "Jesus speaks to the storm like it’s a rowdy child—and the sea goes silent.",
+      "On the far shore, a screaming, chained man rushes out but falls at Jesus’ feet.",
+      "Demons beg to leave; He sends them into pigs that stampede into the water.",
+      "The man sits clothed and calm, hearing his name instead of his torment.",
+      "Jesus sends him home to tell his story so others can find freedom too."
+    ],
+
     themes: [
       "Jesus has authority over things that terrify you.",
       "The enemy cannot chain what Jesus comes to free.",
@@ -731,6 +800,14 @@ const journeySceneInputs: JourneySceneInput[] = [
       "The synagogue crowd is amazed… then offended.",
       "They question His authority because they knew Him as a kid.",
       "Jesus remarks, ‘A prophet is without honor in his hometown.’"
+    ],
+
+    moments: [
+      "Jesus walks familiar streets with a new team trailing behind.",
+      "His teaching stuns neighbors until old memories cloud their view.",
+      "‘Isn’t this the carpenter?’ echoes through the synagogue.",
+      "Their unbelief shuts doors—only a few receive healing.",
+      "Jesus leaves town, heart steady, taking His mission to those ready to listen."
     ],
 
     themes: [
@@ -795,6 +872,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "That night, He walks on water to reach His disciples."
     ],
 
+    moments: [
+      "Jesus tries to rest, but thousands sprint along the shore to meet Him.",
+      "He teaches and heals anyway, seeing them like sheep without a shepherd.",
+      "As the sun drops, the disciples stress about feeding everyone.",
+      "A boy hands over his small lunch; Jesus lifts it in thanks.",
+      "Baskets keep filling until every stomach is full and leftovers spill over.",
+      "That night the disciples face fierce wind—Jesus walks across the waves to them.",
+      "Fear turns to worship as He climbs in and the storm quits."
+    ],
+
     themes: [
       "Give Jesus what you have—even if it feels small.",
       "When God calls you to help people, He provides the strength.",
@@ -856,6 +943,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He heals the girl instantly."
     ],
 
+    moments: [
+      "Jesus slips into Tyre and Sidon, hoping for quiet in a foreign region.",
+      "Word spreads anyway; a desperate mom tracks Him down and drops to her knees.",
+      "The disciples feel awkward and want to send her away.",
+      "Jesus tests her with hard words, and she answers with humble, fierce faith.",
+      "He smiles, honors her trust, and frees her daughter from miles away.",
+      "She heads home to find peace where chaos ruled."
+    ],
+
     themes: [
       "Persistent faith breaks through barriers.",
       "Jesus’ mercy crosses cultural lines.",
@@ -915,6 +1011,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Jesus multiplies bread and fish for 4,000+ people."
     ],
 
+    moments: [
+      "In the Gentile hills, crowds press in for a glimpse of hope.",
+      "Friends bring a deaf man; Jesus pulls him aside and gently touches his ears and tongue.",
+      "‘Be opened,’ He says—the man hears and speaks for the first time.",
+      "People stay for days soaking up every word until food runs out.",
+      "Moved with compassion, Jesus blesses a few loaves and fish.",
+      "Everyone eats until full, with baskets of leftovers proving love is not scarce."
+    ],
+
     themes: [
       "Jesus opens physical and spiritual ears.",
       "Compassion drives miracles.",
@@ -970,6 +1075,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "In the shadows of pagan temples, He asks, ‘Who do you say I am?’",
       "Peter confesses: ‘You are the Christ.’",
       "Jesus predicts His death for the first time."
+    ],
+
+    moments: [
+      "Jesus takes the crew on a long walk north, far from familiar crowds.",
+      "Surrounded by shrines to false gods, He asks what people say about Him.",
+      "Then He makes it personal: ‘Who do you say I am?’",
+      "Peter blurts out the truth—Jesus is the Messiah.",
+      "Jesus affirms him and immediately talks about the cross and resurrection ahead.",
+      "He invites them to follow by carrying their own cross-sized yes to God."
     ],
 
     themes: [
@@ -1036,6 +1150,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Jesus continues toward Jerusalem with determination."
     ],
 
+    moments: [
+      "Jesus leaves Galilee and crosses the Jordan with crowds trailing.",
+      "He teaches hard truths about faithfulness and commitment.",
+      "Disciples try to manage the moment, but Jesus pulls children close and blesses them.",
+      "A wealthy seeker runs up with big questions and walks away unwilling to let go.",
+      "Jesus reminds everyone that the last can be first in His kingdom.",
+      "With the cross ahead, He keeps moving toward Jerusalem."
+    ],
+
     themes: [
       "Jesus embraces children and the overlooked.",
       "Following Him means surrender—not just rule-keeping.",
@@ -1095,6 +1218,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Zacchaeus climbs a tree to see Jesus.",
       "Jesus invites Himself to Zacchaeus’ house.",
       "Zacchaeus repents with radical generosity."
+    ],
+
+    moments: [
+      "On the road into Jericho, blind men shout for mercy while the crowd shushes them.",
+      "Jesus stops in His tracks, listens, and opens their eyes to light and color.",
+      "Inside the city, Zacchaeus is too short to see, so he scrambles up a sycamore tree.",
+      "Jesus looks up, calls him by name, and invites Himself over for dinner.",
+      "Around the table, greed melts; Zacchaeus promises generosity and payback.",
+      "Jesus declares salvation has come to this house as He resumes the road to Jerusalem."
     ],
 
     themes: [
@@ -1157,6 +1289,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Jesus stays in Bethany with Mary, Martha, Lazarus.",
       "Crowds welcome Him with palm branches.",
       "Jesus enters Jerusalem riding a young donkey."
+    ],
+
+    moments: [
+      "Jesus and the disciples push up the rugged road from Jericho toward Jerusalem.",
+      "They rest with friends in Bethany, sharing meals with Mary, Martha, and Lazarus.",
+      "Jesus sends for a young donkey and chooses a humble ride instead of a war horse.",
+      "Crowds spread cloaks and palm branches, shouting ‘Hosanna!’ as He enters.",
+      "The city buzzes—some celebrate, some question, all notice the peaceful King.",
+      "Jesus looks over Jerusalem with tears, knowing the hard week ahead."
     ],
 
     themes: [
@@ -1228,6 +1369,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "A widow drops her two coins—Jesus praises her gift."
     ],
 
+    moments: [
+      "Each morning Jesus walks from Bethany toward the Temple courts.",
+      "A leafy fig tree with no fruit becomes a living lesson about empty religion.",
+      "Inside the Temple, He flips tables and blocks injustice from making money off worship.",
+      "Leaders fire questions; Jesus answers with parables, wisdom, and courage.",
+      "He teaches about loving God, loving neighbors, and the coming kingdom.",
+      "Quietly, He points out a widow’s tiny offering as the biggest gift of the day.",
+      "Nights end back in Bethany, resting with friends before returning to the fight."
+    ],
+
     themes: [
       "God cares about fruitfulness, not just appearances.",
       "Jesus hates injustice and exploitation.",
@@ -1288,6 +1439,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He prays in agony while disciples fall asleep.",
       "Judas arrives with soldiers.",
       "Jesus is arrested after healing a wounded servant."
+    ],
+
+    moments: [
+      "Disciples prepare an upstairs room as Jerusalem buzzes for Passover.",
+      "Jesus kneels and washes dusty feet, redefining greatness.",
+      "He breaks bread and lifts a cup, naming a new covenant of forgiveness.",
+      "Whispers of betrayal swirl; Judas slips out into the night.",
+      "In Gethsemane’s dark garden, Jesus wrestles and surrenders in prayer.",
+      "Friends keep dozing while He sweats like blood for the world.",
+      "Torches arrive; Jesus heals a cut ear and chooses arrest instead of escape."
     ],
 
     themes: [
@@ -1353,6 +1514,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "He forgives His executioners.",
       "He promises paradise to a repentant criminal.",
       "He dies with a loud cry: ‘It is finished.’"
+    ],
+
+    moments: [
+      "Through the night Jesus is dragged between religious leaders, Herod, and Pilate.",
+      "Crowds choose Barabbas while soldiers mock Him with thorns and a purple cloak.",
+      "Weak from beating, He stumbles under the cross until Simon is forced to help carry it.",
+      "Nails slam into wood; Jesus prays forgiveness over the people hurting Him.",
+      "A criminal beside Him reaches out and hears a promise of paradise that very day.",
+      "Darkness covers noon; Jesus cries, ‘It is finished,’ and the Temple curtain tears.",
+      "Joseph of Arimathea buries Him in a nearby tomb, stone sealed while friends watch."
     ],
 
     themes: [
@@ -1421,6 +1592,16 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Thomas later sees and believes."
     ],
 
+    moments: [
+      "Before sunrise, women hurry to the tomb and freeze—the stone is already rolled back.",
+      "Angels announce that Jesus is alive, not stolen.",
+      "Mary lingers in tears until Jesus says her name and hope explodes.",
+      "The women sprint to tell the disciples, hearts pounding.",
+      "That night, doors locked tight, Jesus appears in the room with peace on His lips.",
+      "He shows His scars and breathes courage into His friends.",
+      "A week later Thomas touches the wounds himself and moves from doubt to worship."
+    ],
+
     themes: [
       "Jesus knows your name and calls you personally.",
       "Doubt is not disqualified—bring it to Jesus.",
@@ -1482,6 +1663,14 @@ const journeySceneInputs: JourneySceneInput[] = [
       "They sprint back to Jerusalem with joy."
     ],
 
+    moments: [
+      "Two disappointed disciples leave Jerusalem, replaying the weekend in their heads.",
+      "A Stranger walks up, listens, and asks what’s weighing them down.",
+      "He walks mile after mile opening the Scriptures and their hearts start to burn.",
+      "At dinner He breaks bread; suddenly they recognize Jesus and He vanishes.",
+      "Adrenaline replaces exhaustion—they run back to Jerusalem with the news."
+    ],
+
     themes: [
       "Jesus walks with you even when you don’t feel Him.",
       "Scripture opens hearts to truth.",
@@ -1540,6 +1729,15 @@ const journeySceneInputs: JourneySceneInput[] = [
       "Back near Jerusalem, Jesus blesses them.",
       "He ascends as they watch.",
       "Angels promise He will return."
+    ],
+
+    moments: [
+      "On a Galilee mountain, the risen Jesus meets His friends—some worship, some still doubt.",
+      "He hands them the mission: make disciples everywhere, baptize, teach, and go.",
+      "Jesus promises His presence every step of the way.",
+      "They return toward Jerusalem ready to wait for the Spirit.",
+      "On the Mount of Olives, Jesus lifts His hands in blessing.",
+      "He rises into the clouds as angels remind them the story isn’t over."
     ],
 
     themes: [
