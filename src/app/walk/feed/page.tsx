@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import MessageBubble from "../../../components/MessageBubble";
+import ReflectionModal from "../../../components/ReflectionModal";
 import useJourneyFeedEngine from "../../../hooks/useJourneyFeedEngine";
+import useReflections, { ReflectionEntry } from "../../../hooks/useReflections";
 import { journeyScenes } from "../../../data/journeys.ts";
 
 const metersToMiles = (meters: number) => (meters / 1609.34).toFixed(2);
@@ -9,9 +10,16 @@ const metersToMiles = (meters: number) => (meters / 1609.34).toFixed(2);
 type JourneyFeedListProps = {
   feed: ReturnType<typeof useJourneyFeedEngine>["feed"];
   sceneLookup: Record<string, (typeof journeyScenes)[number]>;
+  onSelectMessage?: (messageId: string) => void;
+  reflections?: Record<string, ReflectionEntry>;
 };
 
-const JourneyFeedList: React.FC<JourneyFeedListProps> = ({ feed, sceneLookup }) => {
+const JourneyFeedList: React.FC<JourneyFeedListProps> = ({
+  feed,
+  sceneLookup,
+  onSelectMessage,
+  reflections,
+}) => {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,6 +49,9 @@ const JourneyFeedList: React.FC<JourneyFeedListProps> = ({ feed, sceneLookup }) 
             text={message.text}
             timestamp={message.timestamp}
             icon={scene?.icon ?? "✝️"}
+            messageId={message.id}
+            onSelect={onSelectMessage}
+            hasReflection={Boolean(reflections?.[message.id])}
           />
         );
       })}
@@ -51,6 +62,9 @@ const JourneyFeedList: React.FC<JourneyFeedListProps> = ({ feed, sceneLookup }) 
 const WalkFeedPage: React.FC = () => {
   const { feed, walkState, isTracking, startTracking, stopTracking, error } =
     useJourneyFeedEngine();
+  const { reflections, saveReflection } = useReflections();
+
+  const [activeMessageId, setActiveMessageId] = useState<string | null>(null);
 
   const sceneLookup = useMemo(
     () =>
@@ -63,6 +77,28 @@ const WalkFeedPage: React.FC = () => {
 
   const activeScene = sceneLookup[walkState.currentSceneId];
   const totalDistanceMiles = metersToMiles(walkState.totalDistanceMeters);
+
+  const activeMessage = useMemo(
+    () => feed.find((message) => message.id === activeMessageId) ?? null,
+    [activeMessageId, feed]
+  );
+
+  const lastFeedMessage = feed[feed.length - 1];
+  const activeReflectionText = activeMessage?.id ? reflections[activeMessage.id]?.text ?? "" : "";
+
+  const handleReflectClick = () => {
+    if (lastFeedMessage) {
+      setActiveMessageId(lastFeedMessage.id);
+    }
+  };
+
+  const handleSaveReflection = (text: string) => {
+    if (!activeMessage) return;
+    saveReflection(activeMessage.id, text);
+    setActiveMessageId(null);
+  };
+
+  const handleCloseModal = () => setActiveMessageId(null);
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] text-slate-50 shadow-2xl">
@@ -94,7 +130,12 @@ const WalkFeedPage: React.FC = () => {
         </header>
 
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4 shadow-inner shadow-black/30">
-          <JourneyFeedList feed={feed} sceneLookup={sceneLookup} />
+          <JourneyFeedList
+            feed={feed}
+            sceneLookup={sceneLookup}
+            onSelectMessage={setActiveMessageId}
+            reflections={reflections}
+          />
         </section>
 
         {error ? (
@@ -115,15 +156,24 @@ const WalkFeedPage: React.FC = () => {
               </p>
             </div>
           </div>
-          <Link
-            to="/journal"
-            className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-black/30 transition hover:bg-white"
+          <button
+            type="button"
+            onClick={handleReflectClick}
+            disabled={!lastFeedMessage}
+            className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-black/30 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
           >
             Reflect
-          </Link>
+          </button>
         </footer>
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/30 to-transparent" />
+      <ReflectionModal
+        isOpen={Boolean(activeMessage)}
+        momentText={activeMessage?.text}
+        initialText={activeReflectionText}
+        onSave={handleSaveReflection}
+        onCancel={handleCloseModal}
+      />
     </div>
   );
 };
