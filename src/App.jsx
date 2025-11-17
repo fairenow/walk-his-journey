@@ -7,6 +7,7 @@ import Journal from './pages/Journal.jsx';
 import Discover from './pages/Discover.jsx';
 import Layout from './components/Layout.jsx';
 import WalkFeedPage from './app/walk/feed/page.tsx';
+import SettingsPage from './app/settings/page.tsx';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/prayer/:id" element={<PrayerWalk />} />
           <Route path="/discover" element={<Discover />} />
           <Route path="/journal" element={<Journal />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </div>
     </Layout>

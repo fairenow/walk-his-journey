@@ -19,6 +19,9 @@ export default function Header() {
         <Link to="/journal" className="hover:text-black">
           Journal
         </Link>
+        <Link to="/settings" className="hover:text-black">
+          Settings
+        </Link>
       </nav>
     </header>
   );

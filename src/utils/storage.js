@@ -1,4 +1,8 @@
 const isBrowser = typeof window !== 'undefined';
+export const WALK_STATE_STORAGE_KEY = 'whj_walk_state_v1';
+export const FEED_STORAGE_KEY = 'whj_feed_v1';
+export const REFLECTIONS_STORAGE_KEY = 'whj_reflections_v1';
+const JOURNAL_STORAGE_KEY = 'journal';
 
 function safeParse(value, fallback) {
   try {
@@ -26,7 +30,7 @@ export function getMiles(journeyId) {
 
 export function getJournal() {
   if (!isBrowser) return [];
-  return safeParse(localStorage.getItem('journal'), []);
+  return safeParse(localStorage.getItem(JOURNAL_STORAGE_KEY), []);
 }
 
 export function saveReflection(journeyId, text) {
@@ -41,10 +45,26 @@ export function saveReflection(journeyId, text) {
       timeStyle: 'short',
     }),
   });
-  localStorage.setItem('journal', JSON.stringify(entries));
+  localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(entries));
 }
 
 export function clearProgress() {
   if (!isBrowser) return;
   localStorage.removeItem('progress');
+}
+
+export function clearWalkState() {
+  if (!isBrowser) return;
+  localStorage.removeItem(WALK_STATE_STORAGE_KEY);
+}
+
+export function clearFeedHistory() {
+  if (!isBrowser) return;
+  localStorage.removeItem(FEED_STORAGE_KEY);
+}
+
+export function clearReflections() {
+  if (!isBrowser) return;
+  localStorage.removeItem(JOURNAL_STORAGE_KEY);
+  localStorage.removeItem(REFLECTIONS_STORAGE_KEY);
 }
