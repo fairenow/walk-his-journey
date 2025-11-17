@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import MessageBubble from "../../../components/MessageBubble";
 import ReflectionModal from "../../../components/ReflectionModal";
+import TrackingPermissionModal from "../../../components/TrackingPermissionModal";
 import useJourneyFeedEngine from "../../../hooks/useJourneyFeedEngine";
 import useReflections, { ReflectionEntry } from "../../../hooks/useReflections";
 import { journeyScenes } from "../../../data/journeys.ts";
@@ -65,6 +66,10 @@ const WalkFeedPage: React.FC = () => {
   const { reflections, saveReflection } = useReflections();
 
   const [activeMessageId, setActiveMessageId] = useState<string | null>(null);
+  const [hasTrackingPermission, setHasTrackingPermission] = useState(() =>
+    localStorage.getItem("whj_tracking_allowed_v1") === "true"
+  );
+  const [isPermissionModalOpen, setIsPermissionModalOpen] = useState(false);
 
   const sceneLookup = useMemo(
     () =>
@@ -86,6 +91,15 @@ const WalkFeedPage: React.FC = () => {
   const lastFeedMessage = feed[feed.length - 1];
   const activeReflectionText = activeMessage?.id ? reflections[activeMessage.id]?.text ?? "" : "";
 
+  const handleStartClick = () => {
+    if (hasTrackingPermission) {
+      startTracking();
+      return;
+    }
+
+    setIsPermissionModalOpen(true);
+  };
+
   const handleReflectClick = () => {
     if (lastFeedMessage) {
       setActiveMessageId(lastFeedMessage.id);
@@ -99,6 +113,17 @@ const WalkFeedPage: React.FC = () => {
   };
 
   const handleCloseModal = () => setActiveMessageId(null);
+
+  const handleAllowTracking = () => {
+    localStorage.setItem("whj_tracking_allowed_v1", "true");
+    setHasTrackingPermission(true);
+    setIsPermissionModalOpen(false);
+    startTracking();
+  };
+
+  const handleDeclineTracking = () => {
+    setIsPermissionModalOpen(false);
+  };
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] text-slate-50 shadow-2xl">
@@ -117,7 +142,7 @@ const WalkFeedPage: React.FC = () => {
             </div>
             <button
               type="button"
-              onClick={isTracking ? stopTracking : startTracking}
+              onClick={isTracking ? stopTracking : handleStartClick}
               className={`rounded-2xl border px-5 py-3 text-sm font-semibold shadow-lg shadow-black/30 transition focus:outline-none focus:ring-2 focus:ring-blue-300/60 focus:ring-offset-0 ${
                 isTracking
                   ? "border-red-300/60 bg-red-500/90 text-white hover:bg-red-500"
@@ -173,6 +198,11 @@ const WalkFeedPage: React.FC = () => {
         initialText={activeReflectionText}
         onSave={handleSaveReflection}
         onCancel={handleCloseModal}
+      />
+      <TrackingPermissionModal
+        isOpen={!isTracking && isPermissionModalOpen}
+        onAllow={handleAllowTracking}
+        onDecline={handleDeclineTracking}
       />
     </div>
   );
