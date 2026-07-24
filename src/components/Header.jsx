@@ -4,9 +4,11 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur shadow-sm">
       <div className="flex items-center gap-3">
-        <span className="text-2xl" role="img" aria-label="footsteps">
-          👣
-        </span>
+        <img
+          src="/jesus_walk.png"
+          alt="Walk His Journey logo"
+          className="h-8 w-8 rounded-full object-cover"
+        />
         <span className="text-lg font-semibold tracking-tight">Walk His Journey</span>
       </div>
       <nav className="flex items-center gap-6 text-sm text-gray-600">
