@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import MessageBubble from "../../../components/MessageBubble";
 import ReflectionModal from "../../../components/ReflectionModal";
 import TrackingPermissionModal from "../../../components/TrackingPermissionModal";
@@ -61,6 +62,7 @@ const JourneyFeedList: React.FC<JourneyFeedListProps> = ({
 };
 
 const WalkFeedPage: React.FC = () => {
+  const location = useLocation();
   const { feed, walkState, isTracking, startTracking, stopTracking, error } =
     useJourneyFeedEngine();
   const { reflections, saveReflection } = useReflections();
@@ -70,6 +72,15 @@ const WalkFeedPage: React.FC = () => {
     localStorage.getItem("whj_tracking_allowed_v1") === "true"
   );
   const [isPermissionModalOpen, setIsPermissionModalOpen] = useState(false);
+  const hasAutoStarted = useRef(false);
+
+  useEffect(() => {
+    const shouldStart = (location.state as { startWalking?: boolean } | null)?.startWalking;
+    if (shouldStart && hasTrackingPermission && !hasAutoStarted.current) {
+      hasAutoStarted.current = true;
+      startTracking();
+    }
+  }, [hasTrackingPermission, location.state, startTracking]);
 
   const sceneLookup = useMemo(
     () =>
@@ -126,9 +137,9 @@ const WalkFeedPage: React.FC = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] text-slate-50 shadow-2xl">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.15),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.12),transparent_40%)]" />
-      <div className="relative z-10 space-y-6 p-6 sm:p-8">
+    <div className="app-panel border border-white/10 text-slate-50">
+      <div className="app-panel-backdrop" />
+      <div className="app-panel-content space-y-6 p-6 sm:p-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.14em] text-blue-100/80">Live devotional feed</p>

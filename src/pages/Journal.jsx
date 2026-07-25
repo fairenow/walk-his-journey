@@ -1,186 +1,187 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { getJournal, saveReflection } from '../utils/storage.js';
-import { journeyScenes } from '../data/journeys.ts';
-import { journeys } from '../data/journeys.js';
+
+const getSpeechRecognition = () => window.SpeechRecognition || window.webkitSpeechRecognition;
 
 export default function Journal() {
   const [entries, setEntries] = useState(() => getJournal());
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedScene, setSelectedScene] = useState('');
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
+  const recognitionRef = useRef(null);
+  const finalTranscriptRef = useRef('');
+  const interimTranscriptRef = useRef('');
+  const keepListeningRef = useRef(false);
+  const sessionErroredRef = useRef(false);
 
-  const sceneOptions = useMemo(
-    () => [...journeyScenes].sort((a, b) => a.order - b.order),
-    []
-  );
+  useEffect(() => () => {
+    keepListeningRef.current = false;
+    recognitionRef.current?.abort();
+  }, []);
 
-  const journeyTitle = (id) => {
-    return (
-      journeyScenes.find((scene) => scene.id === id)?.title ||
-      journeys.find((journey) => journey.id === id)?.title ||
-      'Journey'
-    );
-  };
+  const saveTranscript = () => {
+    const transcript = `${finalTranscriptRef.current} ${interimTranscriptRef.current}`
+      .replace(/\s+/g, ' ')
+      .trim();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-    setSelectedScene((current) => current || sceneOptions[0]?.id || '');
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTitle('');
-    setText('');
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!text.trim()) {
-      alert('Please enter your reflection before saving.');
+    if (!transcript) {
+      setStatus('idle');
+      setError("I couldn't hear anything. Tap the microphone and try again.");
       return;
     }
 
-    saveReflection(selectedScene, text.trim(), title);
+    saveReflection('voice-journal', transcript);
     setEntries(getJournal());
-    closeModal();
+    setStatus('saved');
+    window.setTimeout(() => setStatus('idle'), 1800);
+  };
+
+  const startJournal = async () => {
+    const SpeechRecognition = getSpeechRecognition();
+    if (!SpeechRecognition) {
+      setError('Voice journaling is not supported by this browser. Try Chrome or Safari.');
+      return;
+    }
+
+    setError('');
+    finalTranscriptRef.current = '';
+    interimTranscriptRef.current = '';
+    keepListeningRef.current = true;
+    sessionErroredRef.current = false;
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = navigator.language || 'en-US';
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      for (let index = event.resultIndex; index < event.results.length; index += 1) {
+        const words = event.results[index][0].transcript;
+        if (event.results[index].isFinal) {
+          finalTranscriptRef.current += ` ${words}`;
+        } else {
+          interim += words;
+        }
+      }
+      interimTranscriptRef.current = interim;
+    };
+
+    recognition.onerror = (event) => {
+      if (event.error === 'no-speech') return;
+      keepListeningRef.current = false;
+      sessionErroredRef.current = true;
+      setStatus('idle');
+      setError(event.error === 'not-allowed'
+        ? 'Microphone access is needed to record your journal.'
+        : 'Something interrupted the recording. Please try again.');
+    };
+
+    recognition.onend = () => {
+      if (keepListeningRef.current) {
+        try {
+          recognition.start();
+        } catch {
+          keepListeningRef.current = false;
+          setStatus('idle');
+          setError('The recording stopped unexpectedly. Please try again.');
+        }
+        return;
+      }
+
+      if (!sessionErroredRef.current) saveTranscript();
+    };
+
+    recognitionRef.current = recognition;
+    setStatus('listening');
+
+    try {
+      recognition.start();
+    } catch {
+      keepListeningRef.current = false;
+      setStatus('idle');
+      setError('Unable to start the microphone. Please try again.');
+    }
+  };
+
+  const finishJournal = () => {
+    keepListeningRef.current = false;
+    setStatus('processing');
+    recognitionRef.current?.stop();
+  };
+
+  const handlePrimaryAction = () => {
+    if (status === 'idle' || status === 'saved') startJournal();
+    if (status === 'listening') finishJournal();
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <p className="text-sm uppercase tracking-wide text-blue-700">Reflections</p>
-          <h1 className="text-3xl font-bold text-slate-900">My Journal</h1>
-          <p className="mt-2 text-slate-600">
-            Saved prayer walk reflections appear here. Capture what God is showing you along the way.
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={openModal}
-            className="inline-flex items-center gap-2 rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-          >
-            + New Reflection
-          </button>
-          <Link to="/" className="btn-secondary">
-            ← Home
-          </Link>
-        </div>
-      </div>
+    <div className="app-panel min-h-[calc(100dvh-8.5rem)] px-4 py-10 sm:px-8 sm:py-14">
+      <div className="app-panel-backdrop" />
+      <div className="app-panel-content">
+      <section className="mx-auto flex max-w-2xl flex-col items-center text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-blue-200/70">Your reflections</p>
+        <h1 className="mt-3 text-5xl font-bold tracking-tight sm:text-6xl">Journal</h1>
+        <p className="mt-4 max-w-sm text-base leading-relaxed text-blue-100/70">
+          Speak what’s on your heart. Saved entries stay on this device.
+        </p>
 
-      {entries.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center text-slate-600">
-          <p>No journal entries yet.</p>
-          <p className="mt-1">Start a Prayer Walk or add your first reflection right here.</p>
-          <button
-            type="button"
-            onClick={openModal}
-            className="mt-4 inline-flex items-center rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-          >
-            Start your first reflection
-          </button>
-        </div>
-      ) : (
-        <div className="grid gap-4">
-          {entries.map((entry, index) => (
-            <div key={index} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">{journeyTitle(entry.journeyId)}</p>
-              <p className="text-xs text-slate-500">{entry.date}</p>
-              {entry.title ? (
-                <h2 className="mt-2 text-lg font-semibold text-slate-900">{entry.title}</h2>
-              ) : null}
-              <p className="mt-3 whitespace-pre-line text-slate-800">{entry.text}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {isModalOpen ? (
-        <div className="fixed inset-0 z-10 flex items-center justify-center bg-slate-900/40 px-4">
-          <div className="w-full max-w-xl rounded-2xl bg-white p-6 shadow-xl">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">New Reflection</p>
-                <h2 className="text-2xl font-bold text-slate-900">Capture your thoughts</h2>
-                <p className="mt-1 text-sm text-slate-600">Link this reflection to a journey scene and save it to your journal.</p>
-              </div>
-              <button
-                type="button"
-                onClick={closeModal}
-                className="text-slate-400 transition hover:text-slate-600"
-                aria-label="Close"
-              >
-                ✕
-              </button>
-            </div>
-
-            <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
-              <label className="block space-y-2">
-                <div className="flex items-center justify-between text-sm font-semibold text-slate-800">
-                  <span>Journey scene</span>
-                  <span className="text-xs font-normal text-slate-500">Required</span>
-                </div>
-                <select
-                  required
-                  value={selectedScene}
-                  onChange={(event) => setSelectedScene(event.target.value)}
-                  className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
-                >
-                  {sceneOptions.map((scene) => (
-                    <option key={scene.id} value={scene.id}>
-                      {scene.title}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="block space-y-2">
-                <span className="text-sm font-semibold text-slate-800">Title (optional)</span>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                  placeholder="A short headline for this reflection"
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
-                />
-              </label>
-
-              <label className="block space-y-2">
-                <div className="flex items-center justify-between text-sm font-semibold text-slate-800">
-                  <span>Reflection</span>
-                  <span className="text-xs font-normal text-slate-500">Required</span>
-                </div>
-                <textarea
-                  required
-                  value={text}
-                  onChange={(event) => setText(event.target.value)}
-                  placeholder="Write what stood out, what you sensed, or how you'll respond."
-                  className="h-40 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
-                />
-              </label>
-
-              <div className="flex justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="inline-flex items-center rounded-md border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="inline-flex items-center rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-                >
-                  Save reflection
-                </button>
-              </div>
-            </form>
+        <div className="mt-10 flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] shadow-inner shadow-black/30">
+          <div className={`flex h-24 w-24 items-center justify-center rounded-full transition ${
+            status === 'listening'
+              ? 'animate-pulse bg-red-500 text-white shadow-[0_0_40px_rgba(239,68,68,0.45)]'
+              : 'bg-emerald-400 text-emerald-950 shadow-[0_0_30px_rgba(52,211,153,0.25)]'
+          }`}>
+            <svg viewBox="0 0 24 24" className="h-11 w-11" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="11" rx="3" />
+              <path strokeLinecap="round" d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6" />
+            </svg>
           </div>
         </div>
-      ) : null}
+
+        <p className="mt-6 min-h-6 text-sm font-semibold text-blue-100/75" aria-live="polite">
+          {status === 'idle' && 'Tap to begin'}
+          {status === 'listening' && 'Listening… say whatever comes to mind'}
+          {status === 'processing' && 'Transcribing your reflection…'}
+          {status === 'saved' && 'Saved to your journal'}
+        </p>
+
+        <button
+          type="button"
+          onClick={handlePrimaryAction}
+          disabled={status === 'processing'}
+          className={`mt-4 w-full max-w-md rounded-2xl px-8 py-5 text-lg font-extrabold tracking-wide shadow-xl shadow-black/20 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 disabled:cursor-wait disabled:opacity-70 ${
+            status === 'listening'
+              ? 'border border-red-300/60 bg-red-500 text-white hover:bg-red-400'
+              : 'border border-emerald-300/60 bg-emerald-400/90 text-emerald-950 hover:bg-emerald-400'
+          }`}
+        >
+          {status === 'idle' && 'Start journal'}
+          {status === 'listening' && 'Done'}
+          {status === 'processing' && 'Transcribing…'}
+          {status === 'saved' && 'Saved ✓'}
+        </button>
+
+        {error ? <p className="mt-4 text-sm text-red-200" role="alert">{error}</p> : null}
+      </section>
+
+      <section className="mx-auto mt-14 max-w-2xl">
+        <h2 className="text-lg font-bold text-white">Past entries</h2>
+        {entries.length === 0 ? (
+          <div className="mt-4 rounded-2xl border border-dashed border-white/15 p-6 text-center text-sm text-blue-100/55">
+            Your spoken reflections will appear here.
+          </div>
+        ) : (
+          <div className="mt-4 space-y-3">
+            {entries.map((entry, index) => (
+              <article key={`${entry.date}-${index}`} className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 shadow-inner shadow-black/20">
+                <time className="text-xs font-bold uppercase tracking-[0.14em] text-blue-200/60">{entry.date}</time>
+                <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-blue-50/90">{entry.text}</p>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { journeyScenes } from "../../../data/journeys.ts";
+import { getBiblePassageUrl } from "../../../utils/bible.js";
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
-  <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-left text-sm text-blue-50/90 shadow-inner shadow-black/30">
+  <div className="min-w-0 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-left text-sm text-blue-50/90 shadow-inner shadow-black/30">
     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-blue-100/70">{label}</p>
-    <p className="text-base font-semibold text-white">{value}</p>
+    <p className="mt-1 break-words text-base font-semibold leading-snug text-white [overflow-wrap:anywhere]">{value}</p>
   </div>
 );
 
@@ -54,23 +55,20 @@ const SceneDetailPage: React.FC = () => {
         <div className="absolute -left-16 -top-16 h-36 w-36 rotate-12 rounded-full bg-blue-500/10 blur-3xl" />
         <div className="absolute -right-10 bottom-0 h-32 w-32 -rotate-12 rounded-full bg-emerald-400/10 blur-3xl" />
         <div className="relative flex flex-col gap-5">
-          <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-3xl shadow-inner shadow-black/40">
-              <span aria-hidden>{scene.icon}</span>
-            </div>
-            <div className="flex-1 space-y-2">
+          <div className="flex items-start">
+            <div className="min-w-0 flex-1 space-y-2">
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100/80">
                 <span className="rounded-full bg-white/10 px-3 py-1">{scene.phaseTitle}</span>
                 {scene.approxDate ? (
                   <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] text-blue-50">{scene.approxDate}</span>
                 ) : null}
               </div>
-              <h1 className="text-3xl font-bold drop-shadow-sm sm:text-4xl">{scene.title}</h1>
+              <h1 className="break-words text-3xl font-bold drop-shadow-sm [overflow-wrap:anywhere] sm:text-4xl">{scene.title}</h1>
               <p className="text-sm text-blue-100/80">{scene.tagLine}</p>
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
-            <StatPill label="Route" value={`${scene.from} → ${scene.to}`} />
+            <StatPill label="Route" value={`${scene.from} to ${scene.to}`} />
             <StatPill label="Distance" value={distanceLabel} />
             <StatPill
               label="Scripture"
@@ -144,14 +142,17 @@ const SceneDetailPage: React.FC = () => {
           <DetailSection title="Scripture">
             <div className="space-y-2">
               {scene.scriptureRefs.map((ref) => (
-                <div
+                <a
                   key={`${ref.book}-${ref.ref}`}
+                  href={getBiblePassageUrl(ref.book, ref.ref)}
+                  target="_blank"
+                  rel="noreferrer"
                   className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/90 px-4 py-2 text-sm text-slate-800"
                 >
-                  <span className="text-amber-600">📖</span>
                   <span className="font-semibold text-slate-900">{ref.book}</span>
                   <span className="text-slate-700">{ref.ref}</span>
-                </div>
+                  <span className="ml-auto text-xs font-semibold uppercase tracking-wide text-amber-700">Read</span>
+                </a>
               ))}
             </div>
           </DetailSection>
