@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import MessageBubble from "../../../components/MessageBubble";
 import ReflectionModal from "../../../components/ReflectionModal";
 import TrackingPermissionModal from "../../../components/TrackingPermissionModal";
@@ -61,6 +62,7 @@ const JourneyFeedList: React.FC<JourneyFeedListProps> = ({
 };
 
 const WalkFeedPage: React.FC = () => {
+  const location = useLocation();
   const { feed, walkState, isTracking, startTracking, stopTracking, error } =
     useJourneyFeedEngine();
   const { reflections, saveReflection } = useReflections();
@@ -70,6 +72,15 @@ const WalkFeedPage: React.FC = () => {
     localStorage.getItem("whj_tracking_allowed_v1") === "true"
   );
   const [isPermissionModalOpen, setIsPermissionModalOpen] = useState(false);
+  const hasAutoStarted = useRef(false);
+
+  useEffect(() => {
+    const shouldStart = (location.state as { startWalking?: boolean } | null)?.startWalking;
+    if (shouldStart && hasTrackingPermission && !hasAutoStarted.current) {
+      hasAutoStarted.current = true;
+      startTracking();
+    }
+  }, [hasTrackingPermission, location.state, startTracking]);
 
   const sceneLookup = useMemo(
     () =>

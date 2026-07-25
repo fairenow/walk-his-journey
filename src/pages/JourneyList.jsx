@@ -1,58 +1,114 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const LOCATION_PERMISSION_KEY = 'whj_tracking_allowed_v1';
+
+function LocationIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z" />
+      <circle cx="12" cy="9" r="2.4" />
+    </svg>
+  );
+}
 
 export default function JourneyList() {
-  return (
-    <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-900 via-slate-900 to-blue-950 text-white shadow-2xl">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.15),transparent_35%)]" />
-        <div className="relative z-10 grid gap-8 p-8 sm:grid-cols-2 sm:items-center sm:gap-12 sm:p-12">
-          <div className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.16em] text-blue-100/80">Journey feed</p>
-            <h1 className="text-4xl font-bold leading-tight sm:text-5xl">Walk with Jesus—one moment at a time</h1>
-            <p className="max-w-xl text-lg text-blue-100/90">
-              Every step can become a prayer. Slow down, listen for His presence, and let the next
-              devotional moment meet you right where you are.
-            </p>
-            <div className="space-y-3">
-              <Link
-                to="/walk/feed"
-                className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
-              >
-                Start Walking With Jesus
-              </Link>
-              <p className="text-sm text-blue-100/80">
-                Your movement stays on your device. No accounts. No tracking outside this app.
-              </p>
-            </div>
-          </div>
+  const navigate = useNavigate();
+  const [locationReady, setLocationReady] = useState(
+    () => localStorage.getItem(LOCATION_PERMISSION_KEY) === 'true'
+  );
+  const [isRequesting, setIsRequesting] = useState(false);
+  const [locationError, setLocationError] = useState('');
 
-          <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-inner shadow-black/30 backdrop-blur">
-            <div className="flex items-center gap-3 text-blue-100/90">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl" aria-hidden>
-                🏛️
-              </span>
-              <div>
-                <p className="text-xs uppercase tracking-[0.14em] text-blue-100/70">Begin the journey</p>
-                <p className="text-base font-semibold">Follow in His footsteps</p>
-              </div>
-            </div>
-            <p className="text-sm leading-relaxed text-blue-100/80">
-              Press start when you head out. As you move, the live feed will surface scenes from Jesus’
-              path with prayer prompts, scripture, and reflections to guide your time.
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-white/10 p-4 text-sm text-blue-50 shadow-inner shadow-black/40">
-                <p className="font-semibold text-white">Live devotional feed</p>
-                <p className="mt-1 text-blue-100/80">New moments appear as your distance grows.</p>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4 text-sm text-blue-50 shadow-inner shadow-black/40">
-                <p className="font-semibold text-white">Stay present</p>
-                <p className="mt-1 text-blue-100/80">No accounts. Just you, your steps, and Jesus.</p>
-              </div>
-            </div>
-          </div>
+  const requestLocation = () => {
+    if (!('geolocation' in navigator)) {
+      setLocationError('Location isn’t available in this browser.');
+      return;
+    }
+
+    setIsRequesting(true);
+    setLocationError('');
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        localStorage.setItem(LOCATION_PERMISSION_KEY, 'true');
+        setLocationReady(true);
+        setIsRequesting(false);
+      },
+      () => {
+        localStorage.removeItem(LOCATION_PERMISSION_KEY);
+        setLocationReady(false);
+        setIsRequesting(false);
+        setLocationError('Turn on location access to begin your walk.');
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+    );
+  };
+
+  const startWalk = () => navigate('/walk/feed', { state: { startWalking: true } });
+
+  return (
+    <section className="relative isolate min-h-[calc(100dvh-8.5rem)] overflow-hidden rounded-[2rem] bg-[#173b36] text-white shadow-2xl shadow-emerald-950/20 sm:min-h-[700px]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(230,193,122,0.22),transparent_32%),linear-gradient(180deg,transparent_35%,rgba(5,26,24,0.92)_100%)]" />
+      <div className="absolute -right-16 top-24 h-72 w-72 rounded-full border border-white/5" />
+      <div className="absolute -left-24 top-40 h-80 w-80 rounded-full border border-white/5" />
+
+      <div className="relative z-10 flex min-h-[calc(100dvh-8.5rem)] flex-col items-center px-6 pb-8 pt-12 text-center sm:min-h-[700px] sm:px-12 sm:pt-16">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/10 shadow-lg shadow-black/10">
+          <span className="text-2xl" aria-hidden="true">✦</span>
         </div>
-      </section>
-    </div>
+
+        <p className="mt-7 text-xs font-semibold uppercase tracking-[0.28em] text-amber-100/80">A guided prayer walk</p>
+        <h1 className="mt-3 max-w-xl font-serif text-5xl leading-[0.98] tracking-tight text-white sm:text-7xl">
+          Walk with <span className="italic text-[#f0d49a]">Jesus</span>
+        </h1>
+        <p className="mt-5 max-w-sm text-base leading-relaxed text-emerald-50/75 sm:text-lg">
+          Take a walk. Receive scripture and quiet prompts along the way.
+        </p>
+
+        <div className="mt-auto w-full max-w-md pt-12">
+          {!locationReady ? (
+            <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.07] p-5 text-left backdrop-blur-sm">
+              <div className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f0d49a] text-[#173b36]">
+                  <LocationIcon />
+                </span>
+                <div>
+                  <h2 className="font-semibold text-white">Share your location</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-emerald-50/65">
+                    Your movement unlocks moments as you walk. Location stays on this device.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={requestLocation}
+                disabled={isRequesting}
+                className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#f0d49a] px-6 py-4 text-base font-bold text-[#173b36] shadow-lg transition hover:bg-[#f7dfae] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:cursor-wait disabled:opacity-70"
+              >
+                <LocationIcon />
+                {isRequesting ? 'Checking location…' : 'Allow location'}
+              </button>
+              {locationError ? <p className="mt-3 text-center text-sm text-amber-100" role="alert">{locationError}</p> : null}
+            </div>
+          ) : (
+            <div>
+              <div className="mb-4 flex items-center justify-center gap-2 text-sm font-medium text-emerald-100/75">
+                <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.8)]" />
+                Location ready
+              </div>
+              <button
+                type="button"
+                onClick={startWalk}
+                className="group flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-[#f0d49a] px-8 py-6 text-xl font-extrabold tracking-[0.14em] text-[#173b36] shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#f7dfae] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                START WALK
+                <span className="text-2xl transition group-hover:translate-x-1" aria-hidden="true">→</span>
+              </button>
+            </div>
+          )}
+          <p className="mt-6 text-xs text-emerald-100/45">Walk safely and stay aware of your surroundings.</p>
+        </div>
+      </div>
+    </section>
   );
 }
