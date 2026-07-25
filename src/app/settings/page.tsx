@@ -5,6 +5,7 @@ import {
   clearReflections,
   clearWalkState,
 } from "../../utils/storage.js";
+import { useTracking } from "../../tracking/TrackingContext";
 
 type SettingActionProps = {
   eyebrow: string;
@@ -44,11 +45,14 @@ const SettingAction: React.FC<SettingActionProps> = ({
 );
 
 const SettingsPage: React.FC = () => {
+  const { clearHistory } = useTracking();
+
   const handleResetJourney = () => {
+    clearHistory();
     clearProgress();
     clearWalkState();
     clearFeedHistory();
-    alert("Your journey progress has been reset.");
+    alert("Your completed walk history and distance have been reset.");
   };
 
   const handleClearReflections = () => {
@@ -73,9 +77,9 @@ const SettingsPage: React.FC = () => {
         <div className="mt-12 space-y-4">
           <SettingAction
             eyebrow="Walking"
-            title="Start the journey over"
-            description="Clear distance, progress, and devotional feed history."
-            buttonLabel="Reset progress"
+            title="Clear walking history"
+            description="Clear completed walks and their distance. An active walk is kept safe."
+            buttonLabel="Clear history"
             onClick={handleResetJourney}
           />
           <SettingAction

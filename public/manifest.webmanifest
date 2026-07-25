@@ -1,0 +1,12 @@
+{
+  "name": "Walk His Journey",
+  "short_name": "Walk",
+  "description": "Track the distance you walk and keep a private history on your device.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1a2f",
+  "theme_color": "#0b1a2f",
+  "icons": [
+    { "src": "/jesus_walk.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
