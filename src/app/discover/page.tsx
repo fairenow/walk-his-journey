@@ -9,7 +9,7 @@ const formatDistance = (miles: number | null, km: number | null) => {
 };
 
 const Fact: React.FC<{ label: string; value: string; className?: string }> = ({ label, value, className = "" }) => (
-  <div className={`min-w-0 rounded-2xl border border-white/10 bg-white/[0.07] p-5 shadow-inner shadow-black/20 ${className}`}>
+  <div className={`min-w-0 rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-inner shadow-black/20 ${className}`}>
     <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">{label}</p>
     <p className="mt-2 break-words text-lg font-bold leading-snug text-white [overflow-wrap:anywhere] sm:text-xl">{value}</p>
   </div>
@@ -24,10 +24,10 @@ const DiscoverSceneCard: React.FC<{ scene: (typeof journeyScenes)[number] }> = (
     : "https://bible.guidedstepswellness.com";
 
   return (
-    <article className="flex flex-col rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#102b4c] to-[#0b1a2f] p-5 text-white shadow-xl shadow-black/20 sm:p-6">
+    <article className="flex flex-col rounded-[1.75rem] border border-white/10 bg-black/20 p-5 text-white shadow-xl shadow-black/20 backdrop-blur-sm sm:p-6">
       <div className="min-w-0">
         <p className="break-words text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">{scene.phaseTitle}</p>
-        <h3 className="mt-2 break-words text-2xl font-bold leading-tight text-white [overflow-wrap:anywhere] sm:text-3xl">{scene.title}</h3>
+        <h3 className="mt-2 break-words font-serif text-2xl font-semibold leading-tight text-white [overflow-wrap:anywhere] sm:text-3xl">{scene.title}</h3>
       </div>
 
       <p className="mt-5 text-base leading-relaxed text-blue-100/75">{scene.cardBlurb}</p>
@@ -67,27 +67,38 @@ const DiscoverPage: React.FC = () => {
   );
 
   return (
-    <div className="-mx-3 -my-3 min-h-screen space-y-10 bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] px-4 py-8 sm:-mx-6 sm:-my-8 sm:px-6 sm:py-10">
-      <section className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.24em] text-blue-200/70">Discover His journey</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">Where did Jesus walk?</h1>
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-blue-100/70">
-          See the place, time, distance, and Scripture for every journey.
-        </p>
-      </section>
+    <div className="relative isolate min-h-screen overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] px-4 py-10 text-white shadow-2xl shadow-black/20 sm:px-8 sm:py-14">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_3%,rgba(59,130,246,0.2),transparent_24%),linear-gradient(180deg,transparent_20%,rgba(3,12,27,0.5)_100%)]" />
+      <div className="pointer-events-none absolute -left-44 top-40 h-80 w-80 rounded-full border border-white/5" />
+      <div className="pointer-events-none absolute -right-40 top-72 h-80 w-80 rounded-full border border-white/5" />
 
-      {scenesByPhase.map(({ phase, scenes }) => (
-        <section key={phase.id} className="mx-auto max-w-5xl space-y-4">
-          <h2 className="border-l-4 border-emerald-400 pl-4 text-xl font-bold text-white sm:text-2xl">
-            {phase.title}
-          </h2>
-          <div className="grid gap-5 lg:grid-cols-2">
-            {scenes.map((scene) => (
-              <DiscoverSceneCard key={scene.id} scene={scene} />
-            ))}
-          </div>
+      <div className="relative z-10 space-y-12">
+        <section className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-100/80">Discover His journey</p>
+          <h1 className="mt-4 font-serif text-5xl leading-[1.02] tracking-tight text-white sm:text-6xl">
+            Where did <span className="italic text-blue-200">Jesus</span> walk?
+          </h1>
+          <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-blue-100/70 sm:text-lg">
+            See the place, time, distance, and Scripture for every journey.
+          </p>
         </section>
-      ))}
+
+        {scenesByPhase.map(({ phase, scenes }) => (
+          <section key={phase.id} className="mx-auto max-w-5xl space-y-5">
+            <div className="border-l-4 border-emerald-400 pl-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/60">Journey chapter</p>
+              <h2 className="mt-1 font-serif text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                {phase.title}
+              </h2>
+            </div>
+            <div className="grid gap-5 lg:grid-cols-2">
+              {scenes.map((scene) => (
+                <DiscoverSceneCard key={scene.id} scene={scene} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 };
