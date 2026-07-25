@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { journeyScenes } from '../data/journeys.ts';
 import { getMiles } from '../utils/storage.js';
+import { getBiblePassageUrl } from '../utils/bible.js';
 
 export default function JourneyDetail() {
   const { id } = useParams();
@@ -123,11 +124,18 @@ export default function JourneyDetail() {
           <Section title="In Your Bible" accent="bg-emerald-500">
             <div className="space-y-2">
               {scene.scriptureRefs.map((ref) => (
-                <div key={`${ref.book}-${ref.ref}`} className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-emerald-100">
+                <a
+                  key={`${ref.book}-${ref.ref}`}
+                  href={getBiblePassageUrl(ref.book, ref.ref)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 shadow-inner ring-1 ring-emerald-100 transition hover:bg-white"
+                >
                   <span className="text-emerald-600">📖</span>
                   <span className="text-slate-800 font-semibold">{ref.book}</span>
                   <span className="text-slate-600">{ref.ref}</span>
-                </div>
+                  <span className="ml-auto text-emerald-700" aria-hidden>↗</span>
+                </a>
               ))}
             </div>
           </Section>

@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { journeyScenes, phases } from "../../data/journeys.ts";
-
-const BIBLE_READER_URL = "https://bible.guidedstepswellness.com";
+import { getBiblePassageUrl } from "../../utils/bible.js";
 
 const formatDistance = (miles: number | null, km: number | null) => {
   if (miles) return `${miles} miles`;
@@ -22,6 +21,10 @@ const Fact: React.FC<{ label: string; value: string; icon: string }> = ({ label,
 const DiscoverSceneCard: React.FC<{ scene: (typeof journeyScenes)[number] }> = ({ scene }) => {
   const scriptureRefs =
     scene.scriptureRefs.map((ref) => `${ref.book} ${ref.ref}`).join(" · ") || "Multiple passages";
+  const primaryScripture = scene.scriptureRefs[0];
+  const bibleUrl = primaryScripture
+    ? getBiblePassageUrl(primaryScripture.book, primaryScripture.ref)
+    : "https://bible.guidedstepswellness.com";
 
   return (
     <article className="flex flex-col rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#102b4c] to-[#0b1a2f] p-5 text-white shadow-xl shadow-black/20 sm:p-6">
@@ -45,11 +48,11 @@ const DiscoverSceneCard: React.FC<{ scene: (typeof journeyScenes)[number] }> = (
       </div>
 
       <a
-        href={BIBLE_READER_URL}
+        href={bibleUrl}
         target="_blank"
         rel="noreferrer"
         className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl border border-emerald-300/60 bg-emerald-400/90 px-6 py-4 text-base font-extrabold tracking-wide text-emerald-950 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
-        aria-label={`Read ${scriptureRefs} in the Bible reader`}
+        aria-label={`Read ${primaryScripture ? `${primaryScripture.book} ${primaryScripture.ref}` : "this passage"} in the Bible reader`}
       >
         Read in the Bible
         <span aria-hidden>↗</span>

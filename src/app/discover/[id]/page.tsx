@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { journeyScenes } from "../../../data/journeys.ts";
+import { getBiblePassageUrl } from "../../../utils/bible.js";
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-left text-sm text-blue-50/90 shadow-inner shadow-black/30">
@@ -144,14 +145,18 @@ const SceneDetailPage: React.FC = () => {
           <DetailSection title="Scripture">
             <div className="space-y-2">
               {scene.scriptureRefs.map((ref) => (
-                <div
+                <a
                   key={`${ref.book}-${ref.ref}`}
+                  href={getBiblePassageUrl(ref.book, ref.ref)}
+                  target="_blank"
+                  rel="noreferrer"
                   className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/90 px-4 py-2 text-sm text-slate-800"
                 >
                   <span className="text-amber-600">📖</span>
                   <span className="font-semibold text-slate-900">{ref.book}</span>
                   <span className="text-slate-700">{ref.ref}</span>
-                </div>
+                  <span className="ml-auto" aria-hidden>↗</span>
+                </a>
               ))}
             </div>
           </DetailSection>
