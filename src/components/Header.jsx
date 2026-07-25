@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const navigation = [
   { to: '/', label: 'Walk', end: true },
+  { to: '/history', label: 'History' },
   { to: '/discover', label: 'Discover' },
   { to: '/journal', label: 'Journal' },
   { to: '/settings', label: 'Settings' },
