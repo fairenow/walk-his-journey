@@ -8,13 +8,10 @@ const formatDistance = (miles: number | null, km: number | null) => {
   return "Not recorded";
 };
 
-const Fact: React.FC<{ label: string; value: string; icon: string }> = ({ label, value, icon }) => (
-  <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-4 shadow-inner shadow-black/20">
-    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">
-      <span aria-hidden>{icon}</span>
-      <span>{label}</span>
-    </div>
-    <p className="mt-2 text-lg font-bold leading-snug text-white sm:text-xl">{value}</p>
+const Fact: React.FC<{ label: string; value: string; className?: string }> = ({ label, value, className = "" }) => (
+  <div className={`min-w-0 rounded-2xl border border-white/10 bg-white/[0.07] p-5 shadow-inner shadow-black/20 ${className}`}>
+    <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">{label}</p>
+    <p className="mt-2 break-words text-lg font-bold leading-snug text-white [overflow-wrap:anywhere] sm:text-xl">{value}</p>
   </div>
 );
 
@@ -28,23 +25,18 @@ const DiscoverSceneCard: React.FC<{ scene: (typeof journeyScenes)[number] }> = (
 
   return (
     <article className="flex flex-col rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-[#102b4c] to-[#0b1a2f] p-5 text-white shadow-xl shadow-black/20 sm:p-6">
-      <div className="flex items-start gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-2xl shadow-inner shadow-black/30">
-          <span aria-hidden>{scene.icon}</span>
-        </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">{scene.phaseTitle}</p>
-          <h3 className="mt-1 text-2xl font-bold leading-tight text-white sm:text-3xl">{scene.title}</h3>
-        </div>
+      <div className="min-w-0">
+        <p className="break-words text-xs font-bold uppercase tracking-[0.16em] text-blue-200/70">{scene.phaseTitle}</p>
+        <h3 className="mt-2 break-words text-2xl font-bold leading-tight text-white [overflow-wrap:anywhere] sm:text-3xl">{scene.title}</h3>
       </div>
 
       <p className="mt-5 text-base leading-relaxed text-blue-100/75">{scene.cardBlurb}</p>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <Fact label="Where" value={`${scene.from} → ${scene.to}`} icon="⌖" />
-        <Fact label="When" value={scene.approxDate || "Date unknown"} icon="◷" />
-        <Fact label="How far" value={formatDistance(scene.distanceMi, scene.distanceKm)} icon="↗" />
-        <Fact label="Scripture" value={scriptureRefs} icon="✦" />
+      <div className="mt-6 grid min-w-0 gap-3 sm:grid-cols-2">
+        <Fact className="sm:col-span-2" label="Where" value={`${scene.from} to ${scene.to}`} />
+        <Fact label="When" value={scene.approxDate || "Date unknown"} />
+        <Fact label="How far" value={formatDistance(scene.distanceMi, scene.distanceKm)} />
+        <Fact className="sm:col-span-2" label="Scripture" value={scriptureRefs} />
       </div>
 
       <a
@@ -55,7 +47,6 @@ const DiscoverSceneCard: React.FC<{ scene: (typeof journeyScenes)[number] }> = (
         aria-label={`Read ${primaryScripture ? `${primaryScripture.book} ${primaryScripture.ref}` : "this passage"} in the Bible reader`}
       >
         Read in the Bible
-        <span aria-hidden>↗</span>
       </a>
     </article>
   );
