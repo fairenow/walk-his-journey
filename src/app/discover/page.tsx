@@ -67,12 +67,12 @@ const DiscoverPage: React.FC = () => {
   );
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] px-4 py-10 text-white shadow-2xl shadow-black/20 sm:px-8 sm:py-14">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_3%,rgba(59,130,246,0.2),transparent_24%),linear-gradient(180deg,transparent_20%,rgba(3,12,27,0.5)_100%)]" />
+    <div className="app-panel min-h-screen px-4 py-10 sm:px-8 sm:py-14">
+      <div className="app-panel-backdrop" />
       <div className="pointer-events-none absolute -left-44 top-40 h-80 w-80 rounded-full border border-white/5" />
       <div className="pointer-events-none absolute -right-40 top-72 h-80 w-80 rounded-full border border-white/5" />
 
-      <div className="relative z-10 space-y-12">
+      <div className="app-panel-content space-y-12">
         <section className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-100/80">Discover His journey</p>
           <h1 className="mt-4 font-serif text-5xl leading-[1.02] tracking-tight text-white sm:text-6xl">

@@ -37,6 +37,28 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
 
+@layer components {
+  .app-panel {
+    @apply relative isolate overflow-hidden rounded-[2rem] text-white shadow-2xl shadow-black/20;
+    background: linear-gradient(to bottom, #0b1a2f, #0f243f, #0b1a2f);
+  }
+
+  .app-panel-backdrop {
+    @apply pointer-events-none absolute inset-0;
+    background:
+      radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.2), transparent 32%),
+      linear-gradient(180deg, transparent 35%, rgba(3, 12, 27, 0.88) 100%);
+  }
+
+  .app-panel-content {
+    @apply relative z-10;
+  }
+
+  .app-surface {
+    @apply rounded-2xl border border-white/10 bg-white/[0.07] shadow-inner shadow-black/20 backdrop-blur-sm;
+  }
+}
+
 .btn-primary {
   @apply inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
 }

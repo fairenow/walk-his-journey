@@ -47,12 +47,12 @@ export default function JourneyList() {
   const startWalk = () => navigate('/walk/feed', { state: { startWalking: true } });
 
   return (
-    <section className="relative isolate min-h-[calc(100dvh-8.5rem)] overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] text-white shadow-2xl shadow-black/20 sm:min-h-[700px]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(59,130,246,0.2),transparent_32%),linear-gradient(180deg,transparent_35%,rgba(3,12,27,0.88)_100%)]" />
+    <section className="app-panel min-h-[calc(100dvh-8.5rem)] sm:min-h-[700px]">
+      <div className="app-panel-backdrop" />
       <div className="absolute -right-16 top-24 h-72 w-72 rounded-full border border-white/5" />
       <div className="absolute -left-24 top-40 h-80 w-80 rounded-full border border-white/5" />
 
-      <div className="relative z-10 flex min-h-[calc(100dvh-8.5rem)] flex-col items-center px-6 pb-8 pt-12 text-center sm:min-h-[700px] sm:px-12 sm:pt-16">
+      <div className="app-panel-content flex min-h-[calc(100dvh-8.5rem)] flex-col items-center px-6 pb-8 pt-12 text-center sm:min-h-[700px] sm:px-12 sm:pt-16">
         <div className="flex h-14 w-14 items-center justify-center rounded-full border border-blue-100/30 bg-blue-100/10 shadow-lg shadow-black/10">
           <span className="text-2xl" aria-hidden="true">✦</span>
         </div>

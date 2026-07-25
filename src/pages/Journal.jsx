@@ -115,7 +115,9 @@ export default function Journal() {
   };
 
   return (
-    <div className="-mx-3 -my-3 min-h-[calc(100dvh-4.5rem)] bg-gradient-to-b from-[#0b1a2f] via-[#0f243f] to-[#0b1a2f] px-4 py-10 text-white sm:-mx-6 sm:-my-8 sm:px-6 sm:py-14">
+    <div className="app-panel min-h-[calc(100dvh-8.5rem)] px-4 py-10 sm:px-8 sm:py-14">
+      <div className="app-panel-backdrop" />
+      <div className="app-panel-content">
       <section className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-blue-200/70">Your reflections</p>
         <h1 className="mt-3 text-5xl font-bold tracking-tight sm:text-6xl">Journal</h1>
@@ -179,6 +181,7 @@ export default function Journal() {
           </div>
         )}
       </section>
+      </div>
     </div>
   );
 }
