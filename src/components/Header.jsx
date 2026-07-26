@@ -40,14 +40,9 @@ export default function Header() {
     `transition hover:text-slate-950 ${isActive ? 'font-semibold text-slate-950' : 'text-slate-600'}`;
 
   return (
-    <header className="relative z-40 flex items-center justify-between gap-4 bg-white/85 px-4 py-3 shadow-sm backdrop-blur sm:px-6 sm:py-4">
-      <Link to="/" className="flex items-center gap-3 hover:no-underline">
-        <img
-          src="/jesus_walk.png"
-          alt=""
-          className="h-8 w-8 rounded-full object-cover"
-        />
-        <span className="text-base font-semibold tracking-tight sm:text-lg">Walk His Journey</span>
+    <header className="relative z-40 flex items-center justify-between gap-4 border-b border-slate-200 bg-slate-50/95 px-4 py-3 shadow-sm backdrop-blur sm:px-6 sm:py-4">
+      <Link to="/" className="hover:no-underline">
+        <span className="text-base font-semibold tracking-tight sm:text-lg">Faith Walk</span>
       </Link>
 
       <nav aria-label="Primary navigation" className="hidden items-center gap-6 text-sm sm:flex">
